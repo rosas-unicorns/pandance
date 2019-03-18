@@ -6,10 +6,17 @@
     <title>Boilermaker</title>
     <link rel="stylesheet" href="/style.css" />
     <script defer src="/bundle.js"></script>
-    <!-- <babylon model="https://playground.babylonjs.com/scenes/Rabbit.babylon"></babylon>
-    <script src="https://viewer.babylonjs.com/viewer.js"></script> -->
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/babylonjs/3.3.0/babylon.js'></script>
+    <script src='https://cdn.jsdelivr.net/npm/babylonjs-gui@3.3.0/babylon.gui.min.js'></script>
   </head>
+  <style>
+    #main {
+      width: 100%;
+      height: 100%;
+    }
+  </style>
   <body>
+    <canvas id='main'></canvas>
     <div id="app"></div>
   </body>
 </html>
