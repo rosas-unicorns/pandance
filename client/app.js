@@ -1,13 +1,11 @@
 import React from 'react'
-
-import {Navbar} from './components'
-import Routes from './routes'
+import SoundKey from './components'
 
 const App = () => {
   return (
     <div>
-      <Navbar />
-      <Routes />
+      <h1>Hello</h1>
+      <SoundKey />
     </div>
   )
 }
