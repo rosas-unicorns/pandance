@@ -1,77 +1,15 @@
 import React, {Component} from 'react'
-import * as Mousetrap from 'mousetrap'
+import SoundKey from './SoundKey'
+import Test from './Test'
+import Test2 from './Test2'
 
-class SoundKey extends Component {
-  componentDidMount() {
-    Mousetrap.bind('q', () => {
-      const audio = document.createElement('audio')
-      audio.src = 'http://www.wavlist.com/soundfx/011/duck-baby.wav'
-      audio.load()
-      audio.play()
-    })
-    Mousetrap.bind('w', () => {
-      const audio = document.createElement('audio')
-      audio.src = 'http://www.wavlist.com/soundfx/026/cymbal1.wav'
-      audio.load()
-      audio.play()
-    })
-    Mousetrap.bind('e', () => {
-      const audio = document.createElement('audio')
-      audio.src = 'http://www.wavlist.com/soundfx/015/dino-baby.wav'
-      audio.load()
-      audio.play()
-    })
-    Mousetrap.bind('y', () => {
-      const audio = document.createElement('audio')
-      audio.src = 'http://www.wavlist.com/soundfx/011/duck-baby.wav'
-      audio.load()
-      audio.play()
-    })
-    Mousetrap.bind('t', () => {
-      const audio = document.createElement('audio')
-      audio.src = 'http://www.wavlist.com/soundfx/011/duck-baby.wav'
-      audio.load()
-      audio.play()
-    })
-    Mousetrap.bind('r', () => {
-      const audio = document.createElement('audio')
-      audio.src = 'http://www.wavlist.com/soundfx/011/duck-baby.wav'
-      audio.load()
-      audio.play()
-    })
-    Mousetrap.bind('u', () => {
-      const audio = document.createElement('audio')
-      audio.src = 'http://www.wavlist.com/soundfx/011/duck-baby.wav'
-      audio.load()
-      audio.play()
-    })
-    Mousetrap.bind('i', () => {
-      const audio = document.createElement('audio')
-      audio.src = 'http://www.wavlist.com/soundfx/011/duck-baby.wav'
-      audio.load()
-      audio.play()
-    })
-    Mousetrap.bind('o', () => {
-      const audio = document.createElement('audio')
-      audio.src = 'http://www.wavlist.com/soundfx/011/duck-baby.wav'
-      audio.load()
-      audio.play()
-    })
-    Mousetrap.bind('p', () => {
-      const audio = document.createElement('audio')
-      audio.src = 'http://www.wavlist.com/soundfx/011/duck-baby.wav'
-      audio.load()
-      audio.play()
-    })
-  }
-
-  componentWillUnmount() {
-    Mousetrap.unbind('q')
-  }
-
+class App extends Component {
   render() {
-    return <h1>Hola</h1>
+    var scene = [<Test2 />, <Test />]
+    console.log(scene)
+    return <div>{scene[1]}</div>
   }
 }
 
-export default SoundKey
+// <SoundKey/>
+export default App
