@@ -82,7 +82,7 @@ const Test = () => {
       )
       skyboxMaterial.reflectionTexture.coordinatesMode =
         BABYLON.Texture.SKYBOX_MODE
-
+      
       var inputMap = {}
       scene.actionManager = new BABYLON.ActionManager(scene)
       scene.actionManager.registerAction(
@@ -165,6 +165,32 @@ const Test = () => {
           particle()
         }
       })
+      
+      BABYLON.SceneLoader.ImportMesh(
+        '',
+        '/assets/',
+        'panda2.babylon',
+        scene,
+        function(newMeshes, particleSystems, skeletons) {
+          var skeleton = skeletons[0]
+          var panda = newMeshes[0]
+
+          panda.position = new BABYLON.Vector3(0, 10, 0)
+
+          // POSES
+          var defaultPose = scene.beginWeightedAnimation(
+            skeleton,
+            0,
+            1,
+            1.0,
+            true
+          )
+          var bothArmsUp = scene.beginWeightedAnimation(skeleton, 1, 2, 0, true)
+          var leftLegUp = scene.beginWeightedAnimation(skeleton, 2, 3, 0, true)
+
+          engine.hideLoadingUI()
+        }
+      )
 
       engine.runRenderLoop(function() {
         scene.render()
