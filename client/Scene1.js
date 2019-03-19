@@ -1,8 +1,5 @@
 import * as BABYLON from 'babylonjs'
 import * as React from 'react'
-// import grasses from './assets/grass.jpg'
-import 'babylonjs-loaders'
-import * as GUI from 'babylonjs-gui'
 
 const Test = () => {
   return (
@@ -80,6 +77,32 @@ const Test = () => {
       )
       skyboxMaterial.reflectionTexture.coordinatesMode =
         BABYLON.Texture.SKYBOX_MODE
+
+      BABYLON.SceneLoader.ImportMesh(
+        '',
+        '/assets/',
+        'panda2.babylon',
+        scene,
+        function(newMeshes, particleSystems, skeletons) {
+          var skeleton = skeletons[0]
+          var panda = newMeshes[0]
+
+          panda.position = new BABYLON.Vector3(0, 10, 0)
+
+          // POSES
+          var defaultPose = scene.beginWeightedAnimation(
+            skeleton,
+            0,
+            1,
+            1.0,
+            true
+          )
+          var bothArmsUp = scene.beginWeightedAnimation(skeleton, 1, 2, 0, true)
+          var leftLegUp = scene.beginWeightedAnimation(skeleton, 2, 3, 0, true)
+
+          engine.hideLoadingUI()
+        }
+      )
 
       engine.runRenderLoop(function() {
         scene.render()
