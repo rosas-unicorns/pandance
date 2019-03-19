@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import SoundKey from './SoundKey'
 import Scene1 from './Scene1'
-import Test2 from './Test2'
+import Test2 from './test2'
 
 class App extends Component {
   render() {
