@@ -1,15 +1,18 @@
 import React, {Component} from 'react'
 import SoundKey from './SoundKey'
 import Scene1 from './Scene1'
-import Test2 from './test2'
+import SceneBubbles from './SceneBubbles'
 
 class App extends Component {
   render() {
-    var scene = [<Test2 />, <Scene1 />]
-    console.log(scene)
-    return <div>{scene[1]}</div>
+    var scene = [<SceneBubbles />, <Scene1 />]
+    return (
+      <div>
+        <div>{scene[0]}</div>
+        <SoundKey />
+      </div>
+    )
   }
 }
 
-// <SoundKey/>
 export default App

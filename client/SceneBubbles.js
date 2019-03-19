@@ -1,30 +1,20 @@
 import * as BABYLON from 'babylonjs'
 import * as React from 'react'
+// import 'babylonjs-loaders'
 
-const Test = () => {
+const SceneBubbles = () => {
   return (
     window.addEventListener('DOMContentLoaded', function() {
       var canvas = document.getElementById('main')
-
       //create a BabylonJS engine object
       var engine = new BABYLON.Engine(canvas, true)
 
-      //create scene
       var scene = new BABYLON.Scene(engine)
 
-      // create camera
-      var camera = new BABYLON.FreeCamera(
-        'FreeCamera',
-        new BABYLON.Vector3(0, 2, -12),
-        scene
-      )
-
-      // camera.attachControl(canvas, true);
-
+      // Setup environment
       //light environment light (comes from above)
       var light1 = new BABYLON.DirectionalLight(
         'light1',
-        // new BABYLON.Vector3(1, 0, 5),
         new BABYLON.Vector3(0, -1, 0),
         scene
       )
@@ -34,51 +24,20 @@ const Test = () => {
         scene
       )
 
-      light1.intensity = 0.75
-      light2.intensity = 0.5
+      light1.intensity = 0.1
+      light2.intensity = 2.0
 
-      var groundMaterial = new BABYLON.StandardMaterial('ground', scene)
-      groundMaterial.diffuseTexture = new BABYLON.Texture(
-        'assets/earth.png',
+      var camera = new BABYLON.ArcRotateCamera(
+        'ArcRotateCamera',
+        1,
+        0.8,
+        20,
+        new BABYLON.Vector3(0, 0, 0),
         scene
       )
-
-      var ground = BABYLON.Mesh.CreateGroundFromHeightMap(
-        'ground',
-        'assets/earth.jpg',
-        150,
-        150,
-        180,
-        0,
-        5,
-        scene,
-        false
-      )
-      ground.material = groundMaterial
-
-      // skybox
-      var skybox = BABYLON.Mesh.CreateBox('skybox', 500, scene)
-      var skyboxMaterial = new BABYLON.StandardMaterial('skyboxMat', scene)
-
-      // dont render what we cant see
-      skyboxMaterial.backFaceCulling = false // not render out of the skybox
-
-      // move with the camera
-      skybox.infiniteDistance = true
-
-      skybox.material = skyboxMaterial
-
-      // remove reflection in skybox
-      skyboxMaterial.specularColor = new BABYLON.Color3(0, 0, 0)
-      skyboxMaterial.diffuseColor = new BABYLON.Color3(0, 0, 0)
-
-      // texture of the 6 sides of the cubes
-      skyboxMaterial.reflectionTexture = new BABYLON.CubeTexture(
-        'assets/skybox',
-        scene
-      )
-      skyboxMaterial.reflectionTexture.coordinatesMode =
-        BABYLON.Texture.SKYBOX_MODE
+      camera.lowerRadiusLimit = 10
+      camera.upperRadiusLimit = 40
+      camera.attachControl(canvas, true)
 
       var inputMap = {}
       scene.actionManager = new BABYLON.ActionManager(scene)
@@ -109,16 +68,22 @@ const Test = () => {
               scene
             )
 
+            // Fountain object
+            var fountain = BABYLON.Mesh.CreateBox('foutain', 0.01, scene)
+
             //Texture of each particle
             particleSystem.particleTexture = new BABYLON.Texture(
-              'assets/earth.png',
+              '/assets/flare.png',
               scene
             )
 
             // Where the particles come from
-            particleSystem.emitter = ground // the starting object, the emitter
-            particleSystem.minEmitBox = new BABYLON.Vector3(-1, 0, 0) // Starting all from
-            particleSystem.maxEmitBox = new BABYLON.Vector3(1, 0, 0) // To...
+            particleSystem.emitter = fountain // the starting object, the emitter
+            var emitterType = new BABYLON.SphereParticleEmitter()
+            emitterType.radius = 30
+            emitterType.radiusRange = 0
+
+            particleSystem.particleEmitterType = emitterType
 
             // Colors of all particles
             particleSystem.color1 = new BABYLON.Color4(0.7, 0.8, 1.0, 1.0)
@@ -134,17 +99,13 @@ const Test = () => {
             particleSystem.maxLifeTime = 1.5
 
             // Emission rate
-            particleSystem.emitRate = 30
+            particleSystem.emitRate = 3500
 
             // Blend mode : BLENDMODE_ONEONE, or BLENDMODE_STANDARD
             particleSystem.blendMode = BABYLON.ParticleSystem.BLENDMODE_ONEONE
 
             // Set the gravity of all particles
-            particleSystem.gravity = new BABYLON.Vector3(0, -9.81, 0)
-
-            // Direction of each particle after it has been emitted
-            particleSystem.direction1 = new BABYLON.Vector3(-7, 8, 3)
-            particleSystem.direction2 = new BABYLON.Vector3(7, 8, -3)
+            particleSystem.gravity = new BABYLON.Vector3(0, 0, 0)
 
             // Angular speed, in radians
             particleSystem.minAngularSpeed = 0
@@ -152,32 +113,22 @@ const Test = () => {
 
             // Speed
             particleSystem.minEmitPower = 1
-            particleSystem.maxEmitPower = 3
+            particleSystem.maxEmitPower = 1
             particleSystem.updateSpeed = 0.005
+
+            particleSystem.addVelocityGradient(0, 3, 5)
+            particleSystem.addVelocityGradient(1.0, -5, -10)
 
             // Start the particle system
             particleSystem.start()
-            setTimeout(() => particleSystem.stop(), 2000)
           }
           particle()
-        }
-        if (inputMap.z) {
-          console.log('raise your left hand')
-        }
-        if (inputMap.x) {
-          console.log('raise your right hand')
-        }
-        if (inputMap.c) {
-          console.log('raise your left foot')
-        }
-        if (inputMap.v) {
-          console.log('raise your right foot')
         }
       })
 
       BABYLON.SceneLoader.ImportMesh(
         '',
-        '/assets/',
+        'assets/',
         'panda2.babylon',
         scene,
         function(newMeshes, particleSystems, skeletons) {
@@ -208,4 +159,4 @@ const Test = () => {
   )
 }
 
-export default Test
+export default SceneBubbles
