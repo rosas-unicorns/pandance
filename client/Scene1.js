@@ -82,7 +82,7 @@ const Test = () => {
       )
       skyboxMaterial.reflectionTexture.coordinatesMode =
         BABYLON.Texture.SKYBOX_MODE
-      
+
       var inputMap = {}
       scene.actionManager = new BABYLON.ActionManager(scene)
       scene.actionManager.registerAction(
@@ -164,8 +164,20 @@ const Test = () => {
           }
           particle()
         }
+        if (inputMap.z) {
+          console.log('raise your left hand')
+        }
+        if (inputMap.x) {
+          console.log('raise your right hand')
+        }
+        if (inputMap.c) {
+          console.log('raise your left foot')
+        }
+        if (inputMap.v) {
+          console.log('raise your right foot')
+        }
       })
-      
+
       BABYLON.SceneLoader.ImportMesh(
         '',
         '/assets/',
