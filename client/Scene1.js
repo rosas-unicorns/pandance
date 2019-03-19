@@ -15,36 +15,50 @@ const Test = () => {
       //create scene
       var scene = new BABYLON.Scene(engine)
 
-      //create camera
+      // create camera
       var camera = new BABYLON.FreeCamera(
         'FreeCamera',
         new BABYLON.Vector3(0, 2, -12),
         scene
       )
-      // camera.attachControl(canvas);
 
       //light environment light (comes from above)
-      var light = new BABYLON.HemisphericLight(
+      var light1 = new BABYLON.DirectionalLight(
         'light1',
+        // new BABYLON.Vector3(1, 0, 5),
+        new BABYLON.Vector3(0, -1, 0),
+        scene
+      )
+      var light2 = new BABYLON.HemisphericLight(
+        'HemiLight',
         new BABYLON.Vector3(0, 1, 0),
         scene
       )
 
-      //create a sphere
-      // var sphere = BABYLON.Mesh.CreateSphere('sphere1', 16, 2, scene);
-      // sphere.position.y = 1;
+      light1.intensity = 0.75
+      light2.intensity = 0.5
 
-      var ground = BABYLON.Mesh.CreateGround('ground1', 20, 20, 2, scene)
+      var groundMaterial = new BABYLON.StandardMaterial('ground', scene)
+      groundMaterial.diffuseTexture = new BABYLON.Texture(
+        'assets/earth.png',
+        scene
+      )
 
-      var grass = new BABYLON.StandardMaterial('grass', scene)
-      grass.diffuseTexture = new BABYLON.Texture('/assets/grass.jpg', scene)
-      grass.diffuseTexture.uScale = 10
-      grass.diffuseTexture.vScale = 10
-
-      ground.material = grass
+      var ground = BABYLON.Mesh.CreateGroundFromHeightMap(
+        'ground',
+        'assets/earth.jpg',
+        150,
+        150,
+        180,
+        0,
+        5,
+        scene,
+        false
+      )
+      ground.material = groundMaterial
 
       // skybox
-      var skybox = BABYLON.Mesh.CreateBox('skybox', 1000, scene)
+      var skybox = BABYLON.Mesh.CreateBox('skybox', 500, scene)
       var skyboxMaterial = new BABYLON.StandardMaterial('skyboxMat', scene)
 
       // dont render what we cant see
@@ -61,7 +75,7 @@ const Test = () => {
 
       // texture of the 6 sides of the cubes
       skyboxMaterial.reflectionTexture = new BABYLON.CubeTexture(
-        'assets/images/skybox',
+        'assets/skybox',
         scene
       )
       skyboxMaterial.reflectionTexture.coordinatesMode =
