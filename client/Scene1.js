@@ -1,9 +1,5 @@
 import * as BABYLON from 'babylonjs'
 import * as React from 'react'
-// import grasses from './assets/grass.jpg'
-import 'babylonjs-loaders'
-import * as GUI from 'babylonjs-gui'
-// import {particle} from './particle'
 
 const Test = () => {
   return (
