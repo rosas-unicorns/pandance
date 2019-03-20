@@ -39,7 +39,7 @@ const Scene1 = () => {
 
       light1.intensity = 0.75
       light2.intensity = 0.5
-
+      
       // skybox
       var skybox = BABYLON.Mesh.CreateBox('skybox', 500, scene)
       var skyboxMaterial = new BABYLON.StandardMaterial('skyboxMat', scene)
@@ -63,9 +63,6 @@ const Scene1 = () => {
       )
       skyboxMaterial.reflectionTexture.coordinatesMode =
         BABYLON.Texture.SKYBOX_MODE
-
-      var particleSystem = new BABYLON.ParticleSystem('particles', 800, scene)
-      particleSystem.particleTexture = new BABYLON.Texture('textures', scene)
 
       BABYLON.SceneLoader.ImportMesh(
         '',
@@ -125,8 +122,8 @@ const Scene1 = () => {
           Mousetrap.bind(
             'q',
             () => {
-              particleSystem.start()
               // Start the particle system
+              particleSystem.start()
               setTimeout(() => particleSystem.stop(), 500)
 
               lastAnim.syncWith(bothArmsUp)
@@ -162,7 +159,7 @@ const Scene1 = () => {
                 leftLegUp.weight = 1.0 - lastAnim.weight
               }
             })
-          })
+          }, 'keyup')
         }
       )
 
