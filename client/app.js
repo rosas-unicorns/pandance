@@ -1,11 +1,11 @@
 import React, {Component} from 'react'
 import SoundKey from './SoundKey'
-import Scene1 from './Scene1'
+import Pandance from './Pandance'
 import SceneBubbles from './SceneBubbles'
 
 class App extends Component {
   render() {
-    var scene = [<SceneBubbles />, <Scene1 />]
+    var scene = [<SceneBubbles />, <Pandance />]
     return (
       <div>
         <div>{scene[1]}</div>
