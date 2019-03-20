@@ -48,6 +48,8 @@
     "history": "^4.6.3",
     "morgan": "^1.9.1",
     "mousetrap": "^1.6.3",
+    "mousetrap-pause": "^1.0.0",
+    "mousetrap-record": "^1.0.1",
     "passport": "^0.3.2",
     "passport-google-oauth": "^1.0.0",
     "pg": "^6.1.2",

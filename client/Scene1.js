@@ -41,7 +41,7 @@ const Scene1 = () => {
 
       light1.intensity = 0.75
       light2.intensity = 0.5
-      
+
       // skybox
       var skybox = BABYLON.Mesh.CreateBox('skybox', 500, scene)
       var skyboxMaterial = new BABYLON.StandardMaterial('skyboxMat', scene)
@@ -69,7 +69,7 @@ const Scene1 = () => {
       BABYLON.SceneLoader.ImportMesh(
         '',
         '/assets/',
-        'panda2 (1).babylon',
+        'panda.babylon',
         scene,
         function(newMeshes, particleSystems, skeletons) {
           var skeleton = skeletons[0]
