@@ -17,6 +17,11 @@ module.exports = {
   watchOptions: {
     ignored: /node_modules/
   },
+  externals: {
+    oimo: 'OIMO', //or true
+    cannon: 'CANNON', //or true
+    earcut: 'EARCUT'
+  },
   module: {
     rules: [
       {

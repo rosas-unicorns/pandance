@@ -69,9 +69,16 @@ const Scene1 = () => {
         '/assets/',
         'panda.babylon',
         scene,
-        function(newMeshes, particleSystems, skeletons) {
+        function(newMeshes, particleSystem, skeletons) {
           var skeleton = skeletons[0]
+          // console.log(skeleton);
           var panda = newMeshes[0]
+
+          var particleSystem = new BABYLON.ParticleSystem(
+            'particles',
+            2000,
+            scene
+          )
 
           // POSES
           var defaultPose = scene.beginWeightedAnimation(
@@ -90,8 +97,8 @@ const Scene1 = () => {
           particleSystem.maxEmitPanda = new BABYLON.Vector3(1, 0, 0)
 
           particleSystem.color1 = new BABYLON.Color4(0, 0, 0, 10)
-          // particleSystem.color2 = new BABYLON.Color4(0.2, 0.5, 1.0, 1.0);
-          // particleSystem.colorDead = new BABYLON.Color4(0, 0, 0.2, 0.0);
+          particleSystem.color2 = new BABYLON.Color4(0.2, 0.5, 1.0, 1.0)
+          particleSystem.colorDead = new BABYLON.Color4(0, 0, 0.2, 0.0)
 
           particleSystem.minSize = 0.1
           particleSystem.maxSize = 0.5
@@ -144,22 +151,26 @@ const Scene1 = () => {
             'keyup'
           )
 
-          Mousetrap.bind('w', () => {
-            lastAnim.syncWith(leftLegUp)
-            leftLegUp.syncWith()
-            let obs = scene.onBeforeAnimationsObservable.add(function() {
-              lastAnim.weight -= 0.1
-              if (lastAnim.weight <= 0) {
-                scene.onBeforeAnimationsObservable.remove(obs)
-                lastAnim.weight = 0
-                leftLegUp.weight = 1.0
+          Mousetrap.bind(
+            'w',
+            () => {
+              lastAnim.syncWith(leftLegUp)
+              leftLegUp.syncWith()
+              let obs = scene.onBeforeAnimationsObservable.add(function() {
+                lastAnim.weight -= 0.1
+                if (lastAnim.weight <= 0) {
+                  scene.onBeforeAnimationsObservable.remove(obs)
+                  lastAnim.weight = 0
+                  leftLegUp.weight = 1.0
 
-                lastAnim = leftLegUp
-              } else {
-                leftLegUp.weight = 1.0 - lastAnim.weight
-              }
-            })
-          }, 'keyup')
+                  lastAnim = leftLegUp
+                } else {
+                  leftLegUp.weight = 1.0 - lastAnim.weight
+                }
+              })
+            },
+            'keyup'
+          )
         }
       )
 
