@@ -1,7 +1,20 @@
 import React, {Component} from 'react'
 import * as Mousetrap from 'mousetrap'
 
+var Record = require('mousetrap-record')(require('mousetrap'))
+var Pause = require('mousetrap-pause')(require('mousetrap'))
+
 class SoundKey extends Component {
+  constructor() {
+    super()
+    this.state = {
+      records: [],
+      currentRecords: []
+    }
+
+    this.recordSequence = this.recordSequence.bind(this)
+  }
+
   componentDidMount() {
     Mousetrap.bind('q', () => {
       const audio = document.createElement('audio')
@@ -65,12 +78,36 @@ class SoundKey extends Component {
     })
   }
 
+  recordSequence() {
+    console.log('records', this.state.records)
+    var newRecords = this.state.records
+
+    Record.record(function(sequence) {
+      sequence.forEach(key => newRecords.push(key))
+      newRecords = sequence
+      console.log('You pressed: ' + sequence.join(' '))
+      // Record.pause();
+    })
+    this.setState({
+      records: newRecords
+    })
+  }
+
   componentWillUnmount() {
     Mousetrap.unbind('q')
   }
 
   render() {
-    return <div />
+    return (
+      <div>
+        <button type="button" onClick={this.recordSequence}>
+          Record
+        </button>
+        <button type="button" onClick={() => console.log('stop')}>
+          Stop Record
+        </button>
+      </div>
+    )
   }
 }
 

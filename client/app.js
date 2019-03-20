@@ -8,7 +8,7 @@ class App extends Component {
     var scene = [<SceneBubbles />, <Scene1 />]
     return (
       <div>
-        <div>{scene[0]}</div>
+        <div>{scene[1]}</div>
         <SoundKey />
       </div>
     )
