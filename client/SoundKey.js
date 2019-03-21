@@ -13,6 +13,8 @@ class SoundKey extends Component {
     }
 
     this.recordSequence = this.recordSequence.bind(this)
+    this.play = this.play.bind(this)
+    // this.simulateKey = this.simulateKey.bind(this)
   }
 
   componentDidMount() {
@@ -79,9 +81,7 @@ class SoundKey extends Component {
   }
 
   recordSequence() {
-    console.log('records', this.state.records)
-    var newRecords = this.state.records
-
+    var newRecords = []
     Record.record(function(sequence) {
       sequence.forEach(key => newRecords.push(key))
       newRecords = sequence
@@ -93,8 +93,16 @@ class SoundKey extends Component {
     })
   }
 
-  componentWillUnmount() {
-    Mousetrap.unbind('q')
+  play(e, arr = this.state.records) {
+    console.log(arr)
+    const trigger = () => {
+      Mousetrap.trigger(arr[0])
+      this.play(e, arr.slice(1))
+    }
+
+    if (arr.length > 0) {
+      setTimeout(trigger, 800)
+    }
   }
 
   render() {
@@ -103,8 +111,8 @@ class SoundKey extends Component {
         <button type="button" onClick={this.recordSequence}>
           Record
         </button>
-        <button type="button" onClick={() => console.log('stop')}>
-          Stop Record
+        <button type="button" onClick={this.play}>
+          Play
         </button>
       </div>
     )

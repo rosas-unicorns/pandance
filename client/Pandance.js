@@ -2,6 +2,9 @@ import React from 'react'
 import {HemisphericLight, Vector3, ArcRotateCamera} from 'babylonjs'
 import {Engine, Scene} from 'react-babylonjs'
 import Panda from './PandaModel'
+import SoundKey from './SoundKey'
+
+var Record = require('mousetrap-record')(require('mousetrap'))
 
 export default class Pandance extends React.Component {
   constructor(props) {
@@ -49,11 +52,15 @@ export default class Pandance extends React.Component {
   render() {
     console.log(this.state.scene)
     return (
-      <Engine>
-        <Scene onSceneMount={this.onSceneMount}>
-          <Panda scene={this.state.scene} />
-        </Scene>
-      </Engine>
+      <div>
+        <Engine>
+          <Scene onSceneMount={this.onSceneMount}>
+            <Panda scene={this.state.scene} />
+          </Scene>
+        </Engine>
+        <button onClick={this.recordSequence}>Record</button>
+        <SoundKey />
+      </div>
     )
   }
 }

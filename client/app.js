@@ -6,13 +6,9 @@ import SceneBubbles from './SceneBubbles'
 class App extends Component {
   render() {
     var scene = [<SceneBubbles />, <Pandance />]
-    return (
-      <div>
-        <div>{scene[1]}</div>
-        <SoundKey />
-      </div>
-    )
+    return <div>{scene[1]}</div>
   }
 }
 
+// <SoundKey />
 export default App

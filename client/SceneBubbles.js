@@ -129,7 +129,7 @@ const SceneBubbles = () => {
       BABYLON.SceneLoader.ImportMesh(
         '',
         'assets/',
-        'panda2.babylon',
+        'panda.babylon',
         scene,
         function(newMeshes, particleSystems, skeletons) {
           var skeleton = skeletons[3]
