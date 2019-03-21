@@ -2,6 +2,8 @@ import React from 'react'
 import {Vector3} from 'babylonjs'
 import {Model} from 'react-babylonjs'
 import * as Mousetrap from 'mousetrap'
+import Pandance from './Pandance'
+import SceneBubbles from './SceneBubbles'
 
 export default class Panda extends React.Component {
   constructor(props) {
@@ -11,7 +13,8 @@ export default class Panda extends React.Component {
   }
 
   animation(e) {
-    const scene = this.props.scene
+    const scenes = [<Pandance />, <SceneBubbles />]
+    const scene = scenes[this.props.scene]
     var skeleton = e.skeletons[0]
 
     var defaultPose = scene.beginWeightedAnimation(skeleton, 0, 1, 1.0, true)
