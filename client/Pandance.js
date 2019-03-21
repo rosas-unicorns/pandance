@@ -3,6 +3,7 @@ import {HemisphericLight, Vector3, ArcRotateCamera} from 'babylonjs'
 import {Engine, Scene} from 'react-babylonjs'
 import Panda from './PandaModel'
 import SoundKey from './SoundKey'
+import * as Mousetrap from 'mousetrap'
 
 export default class Pandance extends React.Component {
   constructor(props) {
@@ -13,6 +14,7 @@ export default class Pandance extends React.Component {
 
     this.onSceneMount = this.onSceneMount.bind(this)
     this.initEnvironment = this.initEnvironment.bind(this)
+    this.backGroundMusicPlay = this.backGroundMusicPlay.bind(this)
   }
 
   onSceneMount(e) {
@@ -47,6 +49,10 @@ export default class Pandance extends React.Component {
     return {main: light}
   }
 
+  backGroundMusicPlay(e) {
+    console.log(e.target.id)
+  }
+
   render() {
     console.log(this.state.scene)
     const characters = [<Panda scene={this.state.scene} />]
@@ -57,6 +63,9 @@ export default class Pandance extends React.Component {
         <Engine>
           <Scene onSceneMount={this.onSceneMount}>{character}</Scene>
         </Engine>
+        <button id="btn" onClick={this.backGroundMusicPlay}>
+          Music
+        </button>
         <SoundKey />
       </div>
     )
