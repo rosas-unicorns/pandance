@@ -49,12 +49,13 @@ export default class Pandance extends React.Component {
 
   render() {
     console.log(this.state.scene)
+    const characters = [<Panda scene={this.state.scene} />]
+    const character = characters[this.props.character]
+
     return (
       <div>
         <Engine>
-          <Scene onSceneMount={this.onSceneMount}>
-            <Panda scene={this.state.scene} />
-          </Scene>
+          <Scene onSceneMount={this.onSceneMount}>{character}</Scene>
         </Engine>
         <SoundKey />
       </div>
