@@ -2,7 +2,6 @@ import React, {Component} from 'react'
 import * as Mousetrap from 'mousetrap'
 
 var Record = require('mousetrap-record')(require('mousetrap'))
-var Pause = require('mousetrap-pause')(require('mousetrap'))
 
 class SoundKey extends Component {
   constructor() {

@@ -10,7 +10,6 @@ class App extends Component {
     return (
       <div>
         <Selection scenes={scene} />
-        {/* {scene[1]} */}
       </div>
     )
   }
