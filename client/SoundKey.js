@@ -8,8 +8,7 @@ class SoundKey extends Component {
   constructor() {
     super()
     this.state = {
-      records: [],
-      currentRecords: []
+      records: []
     }
 
     this.recordSequence = this.recordSequence.bind(this)
@@ -86,7 +85,6 @@ class SoundKey extends Component {
       sequence.forEach(key => newRecords.push(key))
       newRecords = sequence
       console.log('You pressed: ' + sequence.join(' '))
-      // Record.pause();
     })
     this.setState({
       records: newRecords

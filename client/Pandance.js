@@ -4,8 +4,6 @@ import {Engine, Scene} from 'react-babylonjs'
 import Panda from './PandaModel'
 import SoundKey from './SoundKey'
 
-var Record = require('mousetrap-record')(require('mousetrap'))
-
 export default class Pandance extends React.Component {
   constructor(props) {
     super(props)
@@ -58,7 +56,6 @@ export default class Pandance extends React.Component {
             <Panda scene={this.state.scene} />
           </Scene>
         </Engine>
-        <button onClick={this.recordSequence}>Record</button>
         <SoundKey />
       </div>
     )
