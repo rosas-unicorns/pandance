@@ -1,9 +1,7 @@
 import React from 'react'
 import {HemisphericLight, Vector3, ArcRotateCamera} from 'babylonjs'
 import {Engine, Scene} from 'react-babylonjs'
-import Panda from './PandaModel'
-import SoundKey from './SoundKey'
-import * as Mousetrap from 'mousetrap'
+import PandaModel from './PandaModel'
 
 export default class Pandance extends React.Component {
   constructor(props) {
@@ -14,60 +12,66 @@ export default class Pandance extends React.Component {
 
     this.onSceneMount = this.onSceneMount.bind(this)
     this.initEnvironment = this.initEnvironment.bind(this)
-    this.backGroundMusicPlay = this.backGroundMusicPlay.bind(this)
   }
 
   onSceneMount(e) {
     const {canvas, scene} = e
-    // this.scene = scene
-
     this.setState({scene})
 
-    let lights = this.initEnvironment(canvas, scene)
-
-    var cameraArc = new ArcRotateCamera(
-      'cameraArc',
-      -Math.PI / 2,
-      Math.PI / 2,
-      10,
-      new BABYLON.Vector3(0, 4, 0),
-      scene
-    )
-    cameraArc.attachControl(canvas, true)
+    this.initEnvironment(canvas, scene)
 
     scene.getEngine().runRenderLoop(() => {
-      if (scene) {
-        scene.render()
-      }
+      if (scene) scene.render()
     })
   }
 
   initEnvironment(canvas, scene) {
-    var light = new HemisphericLight('hemi', new Vector3(0, 1, 0), scene)
+    // LIGHTS
+    let light = new HemisphericLight('hemi', new Vector3(0, 1, 0), scene)
+    light.diffuse = new BABYLON.Color3(0.95, 0.95, 1)
+    light.groundColor = new BABYLON.Color3(0.34, 0.25, 0.57)
+    light.intensity = 0.9
     this.light = light
 
-    return {main: light}
-  }
+    // CAMERA
+    const cameraArc = new ArcRotateCamera(
+      'cameraArc',
+      -Math.PI / 2,
+      Math.PI / 2,
+      10,
+      new BABYLON.Vector3(0, 3, 0),
+      scene
+    )
+    cameraArc.attachControl(canvas, true)
 
-  backGroundMusicPlay(e) {
-    console.log(e.target.id)
+    // OPTION TO PASS DOWN
+    if (this.props.background === 'space') {
+      var skybox = BABYLON.MeshBuilder.CreateBox(
+        'skyBox',
+        {size: 1000.0},
+        scene
+      )
+      var skyboxMaterial = new BABYLON.StandardMaterial('skyBox', scene)
+      skyboxMaterial.backFaceCulling = false
+      skyboxMaterial.reflectionTexture = new BABYLON.CubeTexture(
+        'textures/space',
+        scene
+      )
+      skyboxMaterial.reflectionTexture.coordinatesMode =
+        BABYLON.Texture.SKYBOX_MODE
+      skyboxMaterial.diffuseColor = new BABYLON.Color3(0, 0, 0)
+      skyboxMaterial.specularColor = new BABYLON.Color3(0, 0, 0)
+      skybox.material = skyboxMaterial
+    }
   }
 
   render() {
-    console.log(this.state.scene)
-    const characters = [<Panda scene={this.state.scene} />]
-    const character = characters[this.props.character]
-
     return (
-      <div>
-        <Engine>
-          <Scene onSceneMount={this.onSceneMount}>{character}</Scene>
-        </Engine>
-        <button id="btn" onClick={this.backGroundMusicPlay}>
-          Music
-        </button>
-        <SoundKey />
-      </div>
+      <Engine>
+        <Scene onSceneMount={this.onSceneMount}>
+          <PandaModel scene={this.state.scene} />
+        </Scene>
+      </Engine>
     )
   }
 }

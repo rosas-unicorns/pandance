@@ -1,16 +1,10 @@
 import React, {Component} from 'react'
-import SoundKey from './SoundKey'
-import Selection from './SelestPage'
+import Selection from './SelectPage'
 
 class App extends Component {
   render() {
-    return (
-      <div>
-        <Selection />
-      </div>
-    )
+    return <Selection />
   }
 }
 
-// <SoundKey />
 export default App
