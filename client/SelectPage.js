@@ -46,11 +46,12 @@ export default class Selection extends Component {
     return (
       <div>
         {!this.state.play ? (
-          <div>
+          <div className="container">
             <h1>Select A Scene</h1>
             {backgrounds.map((background, idx) => {
               return (
                 <button
+                  className="button"
                   type="button"
                   key={background}
                   name={background}
@@ -65,6 +66,7 @@ export default class Selection extends Component {
               return (
                 <button
                   type="button"
+                  className="button"
                   key={character}
                   name={character}
                   onClick={this.selectCharacter}
@@ -73,7 +75,11 @@ export default class Selection extends Component {
                 </button>
               )
             })}
-            <button type="button" onClick={this.readyToPlay}>
+            <button
+              className="btn-play"
+              type="button"
+              onClick={this.readyToPlay}
+            >
               Play
             </button>
           </div>
