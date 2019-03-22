@@ -10,8 +10,6 @@ export default class PandaModel extends React.Component {
     super(props)
 
     this.onModelLoaded = this.onModelLoaded.bind(this)
-    this.recordSequence = this.recordSequence.bind(this)
-    this.play = this.play.bind(this)
   }
 
   onModelLoaded(e) {
@@ -113,56 +111,6 @@ export default class PandaModel extends React.Component {
     Mousetrap.bind('i', () => animation(pose9), 'keyup')
     Mousetrap.bind('o', () => animation(pose10), 'keyup')
     Mousetrap.bind('p', () => animation(pose11), 'keyup')
-
-    // BUTTONS
-    let advancedTexture = BABYLON.GUI.AdvancedDynamicTexture.CreateFullscreenUI(
-      'UI'
-    )
-    let panel = new BABYLON.GUI.StackPanel()
-    advancedTexture.addControl(panel)
-
-    let recBtn = BABYLON.GUI.Button.CreateSimpleButton('rec', 'Rec')
-    recBtn.width = '150px'
-    recBtn.height = '40px'
-    recBtn.color = 'white'
-    recBtn.onPointerUpObservable.add(this.recordSequence)
-    panel.addControl(recBtn)
-
-    let playBtn = BABYLON.GUI.Button.CreateSimpleButton('play', 'Play')
-    playBtn.width = '150px'
-    playBtn.height = '40px'
-    playBtn.color = 'white'
-    playBtn.paddingTop = '5px'
-    playBtn.onPointerUpObservable.add(this.play)
-    panel.addControl(playBtn)
-  }
-
-  recordSequence() {
-    let newRecords = []
-    Rec.record(function(sequence) {
-      sequence.forEach(key => newRecords.push(key))
-      newRecords = sequence
-      console.log('You pressed: ' + sequence.join(' '))
-    })
-
-    this.setState({
-      records: newRecords
-    })
-  }
-
-  play(pos, evt, arr = this.state.records) {
-    const trigger = () => {
-      console.log(arr[0])
-      const ok = document.getElementById('app')
-      var keyEvent = new KeyboardEvent('keyup', {key: arr[0]})
-      console.log(keyEvent)
-      ok.dispatchEvent(keyEvent)
-      this.play(pos, evt, arr.slice(1))
-    }
-
-    if (arr.length > 0) {
-      setTimeout(trigger, 800)
-    }
   }
 
   render() {
