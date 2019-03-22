@@ -103,6 +103,16 @@ export default class PandaModel extends React.Component {
     var pose9 = scene.beginWeightedAnimation(skeleton, 8, 9, 0, true)
     var pose10 = scene.beginWeightedAnimation(skeleton, 9, 10, 0, true)
     var pose11 = scene.beginWeightedAnimation(skeleton, 10, 11, 0, true)
+    var pose12 = scene.beginWeightedAnimation(skeleton, 11, 12, 0, true)
+    var pose13 = scene.beginWeightedAnimation(skeleton, 12, 13, 0, true)
+    var pose14 = scene.beginWeightedAnimation(skeleton, 13, 14, 0, true)
+    var pose15 = scene.beginWeightedAnimation(skeleton, 14, 15, 0, true)
+    var pose16 = scene.beginWeightedAnimation(skeleton, 15, 16, 0, true)
+    var pose17 = scene.beginWeightedAnimation(skeleton, 16, 17, 0, true)
+    var pose18 = scene.beginWeightedAnimation(skeleton, 17, 18, 0, true)
+    var pose19 = scene.beginWeightedAnimation(skeleton, 18, 19, 0, true)
+    var pose20 = scene.beginWeightedAnimation(skeleton, 19, 20, 0, true)
+    var pose21 = scene.beginWeightedAnimation(skeleton, 20, 21, 0, true)
     var lastAnim = pose1
 
     // KEY BINDINGS
@@ -116,6 +126,24 @@ export default class PandaModel extends React.Component {
     Mousetrap.bind('i', () => animation(pose9), 'keyup')
     Mousetrap.bind('o', () => animation(pose10), 'keyup')
     Mousetrap.bind('p', () => animation(pose11), 'keyup')
+
+    Mousetrap.bind('a', () => animation(pose12), 'keyup')
+    Mousetrap.bind('s', () => animation(pose13), 'keyup')
+    Mousetrap.bind('d', () => animation(pose14), 'keyup')
+    Mousetrap.bind('f', () => animation(pose15), 'keyup')
+    Mousetrap.bind('g', () => animation(pose16), 'keyup')
+    Mousetrap.bind('h', () => animation(pose17), 'keyup')
+    Mousetrap.bind('j', () => animation(pose18), 'keyup')
+    Mousetrap.bind('k', () => animation(pose19), 'keyup')
+    Mousetrap.bind('l', () => animation(pose20), 'keyup')
+
+    Mousetrap.bind('z', () => animation(pose21), 'keyup')
+    Mousetrap.bind('x', () => animation(pose2), 'keyup')
+    Mousetrap.bind('c', () => animation(pose3), 'keyup')
+    Mousetrap.bind('v', () => animation(pose4), 'keyup')
+    Mousetrap.bind('b', () => animation(pose5), 'keyup')
+    Mousetrap.bind('n', () => animation(pose6), 'keyup')
+    Mousetrap.bind('m', () => animation(pose7), 'keyup')
   }
 
   render() {
