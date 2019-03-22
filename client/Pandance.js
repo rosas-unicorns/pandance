@@ -2,6 +2,7 @@ import React from 'react'
 import {HemisphericLight, Vector3, ArcRotateCamera} from 'babylonjs'
 import {Engine, Scene} from 'react-babylonjs'
 import PandaModel from './PandaModel'
+import SoundKey from './SoundKey'
 
 export default class Pandance extends React.Component {
   constructor(props) {
@@ -70,6 +71,7 @@ export default class Pandance extends React.Component {
       <Engine>
         <Scene onSceneMount={this.onSceneMount}>
           <PandaModel scene={this.state.scene} />
+          <SoundKey />
         </Scene>
       </Engine>
     )

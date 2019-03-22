@@ -205,16 +205,7 @@ class SoundKey extends Component {
   }
 
   render() {
-    return (
-      <div>
-        <button type="button" onClick={this.recordSequence}>
-          Record
-        </button>
-        <button type="button" onClick={this.play}>
-          Play
-        </button>
-      </div>
-    )
+    return null
   }
 }
 
