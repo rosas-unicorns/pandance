@@ -30,9 +30,14 @@ export default class PandaModel extends React.Component {
       var particleSystem = new BABYLON.ParticleSystem('particles', 2000, scene)
 
       particleSystem.particleTexture = new BABYLON.Texture(
-        '/textures/panda-colors.png',
+        '/assets/flare.png',
         scene
       )
+      var emitterType = new BABYLON.SphereParticleEmitter()
+      emitterType.radius = 30
+      emitterType.radiusRange = 0
+
+      particleSystem.particleEmitterType = emitterType
 
       particleSystem.emitter = panda
 
@@ -40,13 +45,13 @@ export default class PandaModel extends React.Component {
       particleSystem.color2 = new BABYLON.Color4(0.2, 0.5, 1.0, 1.0)
       particleSystem.colorDead = new BABYLON.Color4(0, 0, 0.2, 0.0)
 
-      particleSystem.minSize = 0.1
-      particleSystem.maxSize = 0.5
+      particleSystem.minSize = 0.3
+      particleSystem.maxSize = 0.9
 
       particleSystem.minLifeTime = 0.3
       particleSystem.maxLifeTime = 1.5
 
-      particleSystem.emitRate = 500
+      particleSystem.emitRate = 1000
 
       particleSystem.blendMode = BABYLON.ParticleSystem.BLENDMODE_ONEONE
 

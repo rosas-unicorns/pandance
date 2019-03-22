@@ -43,6 +43,8 @@ export default class Pandance extends React.Component {
       new BABYLON.Vector3(0, 3, 0),
       scene
     )
+    cameraArc.lowerRadiusLimit = 10
+    cameraArc.upperRadiusLimit = 30
     cameraArc.attachControl(canvas, true)
 
     // OPTION TO PASS DOWN
