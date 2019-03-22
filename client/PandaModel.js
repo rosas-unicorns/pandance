@@ -27,8 +27,51 @@ export default class PandaModel extends React.Component {
     )
     panda.material = pandaMat
 
+    // PARTICLE
+    const particle = () => {
+      var particleSystem = new BABYLON.ParticleSystem('particles', 2000, scene)
+
+      particleSystem.particleTexture = new BABYLON.Texture(
+        '/textures/panda-colors.png',
+        scene
+      )
+
+      particleSystem.emitter = panda
+
+      particleSystem.color1 = new BABYLON.Color4(0.7, 0.8, 1.0, 1.0)
+      particleSystem.color2 = new BABYLON.Color4(0.2, 0.5, 1.0, 1.0)
+      particleSystem.colorDead = new BABYLON.Color4(0, 0, 0.2, 0.0)
+
+      particleSystem.minSize = 0.1
+      particleSystem.maxSize = 0.5
+
+      particleSystem.minLifeTime = 0.3
+      particleSystem.maxLifeTime = 1.5
+
+      particleSystem.emitRate = 500
+
+      particleSystem.blendMode = BABYLON.ParticleSystem.BLENDMODE_ONEONE
+
+      particleSystem.gravity = new BABYLON.Vector3(0, 0, 0)
+
+      particleSystem.minAngularSpeed = 0
+      particleSystem.maxAngularSpeed = Math.PI
+
+      particleSystem.minEmitPower = 1
+      particleSystem.maxEmitPower = 3
+      particleSystem.updateSpeed = 0.005
+
+      particleSystem.addVelocityGradient(0, 3, 5)
+      particleSystem.addVelocityGradient(1.0, -5, -10)
+
+      particleSystem.start()
+
+      setTimeout(() => particleSystem.stop(), 500)
+    }
+
     // ANIMATION FUNCTION
     const animation = newPose => {
+      particle()
       lastAnim.syncWith(newPose)
       newPose.syncWith()
 
