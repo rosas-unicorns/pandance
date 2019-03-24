@@ -4,6 +4,7 @@ import {Engine, Scene} from 'react-babylonjs'
 import PandaModel from './PandaModel'
 import RobotModel from './RobotModel'
 import SoundKey from './SoundKey'
+import DiscoScene from './DiscoScene'
 
 export default class Pandance extends React.Component {
   constructor(props) {
@@ -66,6 +67,8 @@ export default class Pandance extends React.Component {
       skyboxMaterial.diffuseColor = new BABYLON.Color3(0, 0, 0)
       skyboxMaterial.specularColor = new BABYLON.Color3(0, 0, 0)
       skybox.material = skyboxMaterial
+    } else {
+      // scene.clearColor = BABYLON.Color3(0, 0.8, 0)
     }
   }
 

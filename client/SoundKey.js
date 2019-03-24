@@ -54,7 +54,7 @@ class SoundKey extends Component {
     Mousetrap.bind('n', () => createAudio('assets/music/time2.mp3'))
     Mousetrap.bind('m', () => createAudio('assets/music/zig-zag.mp3'))
 
-    Mousetrap.bind('space', () => createAudio('assets/music/clap-loop.mp3'))
+    // Mousetrap.bind('space', () => createAudio('assets/music/clap-loop.mp3'))
 
     // BUTTONS
     let advancedTexture = BABYLON.GUI.AdvancedDynamicTexture.CreateFullscreenUI(

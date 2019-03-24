@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
 import Pandance from './Pandance'
+import DiscoScene from './DiscoScene'
 
 export default class Selection extends Component {
   constructor() {
@@ -16,6 +17,7 @@ export default class Selection extends Component {
   }
 
   selectBackground(e) {
+    console.log(e.target)
     this.setState({
       background: e.target.name
     })
@@ -34,10 +36,14 @@ export default class Selection extends Component {
   }
 
   render() {
-    const backgrounds = ['space', 'bubbles']
+    const backgrounds = ['space', 'disco']
     const characterName = ['panda']
     const scenes = [
       <Pandance
+        character={this.state.character}
+        background={this.state.background}
+      />,
+      <DiscoScene
         character={this.state.character}
         background={this.state.background}
       />
@@ -84,7 +90,7 @@ export default class Selection extends Component {
             </button>
           </div>
         ) : (
-          <div>{scenes[0]}</div>
+          <div>{scenes[1]}</div>
         )}
       </div>
     )
