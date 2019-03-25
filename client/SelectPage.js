@@ -78,6 +78,7 @@ export default class Selection extends Component {
       <DiscoScene
         character={this.state.character}
         background={this.state.background}
+        mode={this.state.mode}
       />
     ]
 
@@ -153,7 +154,7 @@ export default class Selection extends Component {
             </button>
           </div>
         ) : (
-          <div>{scenes[1]}</div>
+          <div>{scenes[0]}</div>
         )}
       </div>
     )
