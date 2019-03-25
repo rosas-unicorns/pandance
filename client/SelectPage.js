@@ -55,7 +55,7 @@ export default class Selection extends Component {
 
   render() {
     const backgrounds = ['space', 'disco']
-    const characterName = ['panda']
+    const characterName = ['panda', 'robot']
     const particle = this.state.particle === 'flare' ? flare : bubble
 
     const scenes = [
@@ -68,8 +68,12 @@ export default class Selection extends Component {
       <DiscoScene
         character={this.state.character}
         background={this.state.background}
+        particle={particle}
+        particleNum={this.state.particleNum}
       />
     ]
+
+    const background = this.state.background === 'space' ? 0 : 1
 
     return (
       <div>
@@ -127,7 +131,7 @@ export default class Selection extends Component {
             </button>
           </div>
         ) : (
-          <div>{scenes[1]}</div>
+          <div>{scenes[background]}</div>
         )}
       </div>
     )

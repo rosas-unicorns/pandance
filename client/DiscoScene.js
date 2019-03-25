@@ -187,7 +187,7 @@ export default class DiscoScene extends React.Component {
 
     //Texture of each particle
     particleSystem.particleTexture = new BABYLON.Texture(
-      '/assets/flare.png',
+      this.props.particle,
       scene
     )
 
@@ -241,7 +241,19 @@ export default class DiscoScene extends React.Component {
     return (
       <Engine>
         <Scene onSceneMount={this.onSceneMount}>
-          <PandaModel scene={this.state.scene} />
+          {this.props.character === 'panda' ? (
+            <PandaModel
+              scene={this.state.scene}
+              particle={this.props.particle}
+              particleNum={this.props.particleNum}
+            />
+          ) : (
+            <RobotModel
+              scene={this.state.scene}
+              particle={this.props.particle}
+              particleNum={this.props.particleNum}
+            />
+          )}
           <SoundKey />
         </Scene>
       </Engine>
