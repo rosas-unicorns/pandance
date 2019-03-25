@@ -7,12 +7,14 @@ export default class Selection extends Component {
     this.state = {
       play: false,
       background: 'space',
-      character: 'panda'
+      character: 'panda',
+      mode: 'ddp'
     }
 
     this.selectBackground = this.selectBackground.bind(this)
     this.selectCharacter = this.selectCharacter.bind(this)
     this.readyToPlay = this.readyToPlay.bind(this)
+    this.selectMode = this.selectMode.bind(this)
   }
 
   selectBackground(e) {
@@ -27,6 +29,12 @@ export default class Selection extends Component {
     })
   }
 
+  selectMode(e) {
+    this.setState({
+      mode: e.target.name
+    })
+  }
+
   readyToPlay() {
     this.setState({
       play: true
@@ -36,10 +44,12 @@ export default class Selection extends Component {
   render() {
     const backgrounds = ['space', 'bubbles']
     const characterName = ['panda']
+    const modes = ['ddp', 'zen']
     const scenes = [
       <Pandance
         character={this.state.character}
         background={this.state.background}
+        mode={this.state.mode}
       />
     ]
 
@@ -72,6 +82,20 @@ export default class Selection extends Component {
                   onClick={this.selectCharacter}
                 >
                   {character}
+                </button>
+              )
+            })}
+            <h1>Select A Mode</h1>
+            {modes.map((mode, idx) => {
+              return (
+                <button
+                  className="button"
+                  type="button"
+                  key={mode}
+                  name={mode}
+                  onClick={this.selectMode}
+                >
+                  {mode}
                 </button>
               )
             })}
