@@ -18,8 +18,6 @@ const createApp = () => {
   // logging middleware
   app.use(morgan('dev'))
 
-  app.use('/api', require('./api'))
-
   // body parsing middleware
   app.use(express.json())
   app.use(express.urlencoded({extended: true}))

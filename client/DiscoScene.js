@@ -40,7 +40,7 @@ export default class DiscoScene extends React.Component {
       'UI'
     )
     var button = BABYLON.GUI.Button.CreateSimpleButton(
-      'but',
+      'panda',
       'Scene ' + (this.state.clicks + 1) % 2
     )
     button.width = 0.2
@@ -50,7 +50,7 @@ export default class DiscoScene extends React.Component {
     button.verticalAlignment = BABYLON.GUI.Control.VERTICAL_ALIGNMENT_BOTTOM
     advancedTexture.addControl(button)
 
-    button.onPointerUpObservable.add(function() {})
+    button.onPointerUpObservable.add(this.props.switchScenes)
     advancedTexture.addControl(button)
     // **********************************************
 

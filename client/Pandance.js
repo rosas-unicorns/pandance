@@ -35,7 +35,7 @@ export default class Pandance2 extends React.Component {
       'UI'
     )
     var button = BABYLON.GUI.Button.CreateSimpleButton(
-      'but',
+      'disco',
       'Scene ' + (this.state.clicks + 1) % 2
     )
     button.width = 0.2
@@ -43,9 +43,8 @@ export default class Pandance2 extends React.Component {
     button.color = 'white'
     button.background = 'green'
     button.verticalAlignment = BABYLON.GUI.Control.VERTICAL_ALIGNMENT_BOTTOM
-    advancedTexture.addControl(button)
 
-    button.onPointerUpObservable.add(function() {})
+    button.onPointerUpObservable.add(this.props.switchScenes)
     advancedTexture.addControl(button)
     // **********************************************
     // LIGHTS
