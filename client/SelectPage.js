@@ -105,18 +105,38 @@ export default class Selection extends Component {
             })}
             <h1>Set Particle</h1>
             Particle:{' '}
-            <select onChange={e => this.changeParticle(e)}>
+            <select
+              className="select-items"
+              onChange={e => this.changeParticle(e)}
+            >
+              <option value="" />
               <option value="flare">Flare</option>
               <option value="bubble">Bubble</option>
             </select>
             Amount of Particle:{' '}
-            <select onChange={e => this.setParticleNum(e)}>
-              <option value="500">500</option>
-              <option value="1000">1000</option>
-              <option value="2000">2000</option>
-              <option value="3000">3000</option>
-              <option value="5000">5000</option>
-              <option value="10000">10000</option>
+            <select
+              className="select-items"
+              onChange={e => this.setParticleNum(e)}
+            >
+              <option className="select-item" value="" />
+              <option className="select-item" value="500">
+                500
+              </option>
+              <option className="select-item" value="1000">
+                1000
+              </option>
+              <option className="select-item" value="2000">
+                2000
+              </option>
+              <option className="select-item" value="3000">
+                3000
+              </option>
+              <option className="select-item" value="5000">
+                5000
+              </option>
+              <option className="select-item" value="10000">
+                10000
+              </option>
             </select>
             <button
               className="btn-play"
