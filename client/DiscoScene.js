@@ -1,15 +1,19 @@
 import React from 'react'
 import {HemisphericLight, PointLight, Vector3, ArcRotateCamera} from 'babylonjs'
-import {Engine, Scene} from 'react-babylonjs'
+import {Engine, Scene, GUI} from 'react-babylonjs'
 import PandaModel from './PandaModel'
 import RobotModel from './RobotModel'
 import SoundKey from './SoundKey'
+import Pandance from './Pandance'
+
+var showScene
 
 export default class DiscoScene extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      scene: {}
+      scene: {},
+      clicks: 0
     }
 
     this.onSceneMount = this.onSceneMount.bind(this)
@@ -18,6 +22,7 @@ export default class DiscoScene extends React.Component {
 
   onSceneMount(e) {
     const {canvas, scene} = e
+    e.scene.actionManagers = [<DiscoScene />]
     this.setState({scene})
 
     this.initEnvironment(canvas, scene)
@@ -28,6 +33,27 @@ export default class DiscoScene extends React.Component {
   }
 
   initEnvironment(canvas, scene) {
+    // Toggle button
+    // *****************************************
+    // button
+    var advancedTexture = BABYLON.GUI.AdvancedDynamicTexture.CreateFullscreenUI(
+      'UI'
+    )
+    var button = BABYLON.GUI.Button.CreateSimpleButton(
+      'but',
+      'Scene ' + (this.state.clicks + 1) % 2
+    )
+    button.width = 0.2
+    button.height = '40px'
+    button.color = 'white'
+    button.background = 'green'
+    button.verticalAlignment = BABYLON.GUI.Control.VERTICAL_ALIGNMENT_BOTTOM
+    advancedTexture.addControl(button)
+
+    button.onPointerUpObservable.add(function() {})
+    advancedTexture.addControl(button)
+    // **********************************************
+
     // LIGHTS
     var light = new BABYLON.HemisphericLight(
       'light1',
@@ -187,7 +213,7 @@ export default class DiscoScene extends React.Component {
 
     //Texture of each particle
     particleSystem.particleTexture = new BABYLON.Texture(
-      this.props.particle,
+      '/assets/flare.png',
       scene
     )
 
@@ -239,24 +265,22 @@ export default class DiscoScene extends React.Component {
 
   render() {
     return (
-      <Engine>
-        <Scene onSceneMount={this.onSceneMount}>
-          {this.props.character === 'panda' ? (
-            <PandaModel
-              scene={this.state.scene}
-              particle={this.props.particle}
-              particleNum={this.props.particleNum}
-            />
-          ) : (
-            <RobotModel
-              scene={this.state.scene}
-              particle={this.props.particle}
-              particleNum={this.props.particleNum}
-            />
-          )}
-          <SoundKey />
-        </Scene>
-      </Engine>
+      <Scene onSceneMount={this.onSceneMount}>
+        {this.props.character === 'panda' ? (
+          <PandaModel
+            scene={this.state.scene}
+            particle={this.props.particle}
+            particleNum={this.props.particleNum}
+          />
+        ) : (
+          <RobotModel
+            scene={this.state.scene}
+            particle={this.props.particle}
+            particleNum={this.props.particleNum}
+          />
+        )}
+        <SoundKey scene={this.state.scene} mode={this.props.mode} />
+      </Scene>
     )
   }
 }
