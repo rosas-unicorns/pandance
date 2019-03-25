@@ -2,6 +2,9 @@ import React from 'react'
 import {Model} from 'react-babylonjs'
 import * as GUI from 'babylonjs-gui'
 import * as Mousetrap from 'mousetrap'
+
+import {particle} from './../script/util'
+
 var Rec = require('mousetrap-record')(require('mousetrap'))
 var canvas
 
@@ -15,63 +18,21 @@ export default class Robot extends React.Component {
   onModelLoaded(e) {
     const scene = this.props.scene
     const skeleton = e.skeletons[0]
-    const robot = e.meshes[0]
+    var robot = e.meshes[0]
     robot.position = {
       x: 0,
       y: -2.5,
       z: 4
     }
 
-    // PARTICLE
-    const particle = () => {
-      var particleSystem = new BABYLON.ParticleSystem('particles', 2000, scene)
-
-      particleSystem.particleTexture = new BABYLON.Texture(
-        this.props.particle,
-        scene
-      )
-      var emitterType = new BABYLON.SphereParticleEmitter()
-      emitterType.radius = 30
-      emitterType.radiusRange = 0
-
-      particleSystem.particleEmitterType = emitterType
-
-      particleSystem.emitter = robot
-
-      particleSystem.color1 = new BABYLON.Color4(0.7, 0.8, 1.0, 1.0)
-      particleSystem.color2 = new BABYLON.Color4(0.2, 0.5, 1.0, 1.0)
-      particleSystem.colorDead = new BABYLON.Color4(0, 0, 0.2, 0.0)
-
-      particleSystem.minSize = 0.3
-      particleSystem.maxSize = 0.9
-
-      particleSystem.minLifeTime = 0.3
-      particleSystem.maxLifeTime = 1.5
-
-      particleSystem.emitRate = this.props.particleNum
-
-      particleSystem.blendMode = BABYLON.ParticleSystem.BLENDMODE_ONEONE
-
-      particleSystem.gravity = new BABYLON.Vector3(0, 0, 0)
-
-      particleSystem.minAngularSpeed = 0
-      particleSystem.maxAngularSpeed = Math.PI
-
-      particleSystem.minEmitPower = 1
-      particleSystem.maxEmitPower = 3
-      particleSystem.updateSpeed = 0.005
-
-      particleSystem.addVelocityGradient(0, 3, 5)
-      particleSystem.addVelocityGradient(1.0, -5, -10)
-
-      particleSystem.start()
-
-      setTimeout(() => particleSystem.stop(), 500)
-    }
-
     // ANIMATION FUNCTION
     const animation = newPose => {
-      particle()
+      particle(
+        this.props.particle,
+        this.props.scene,
+        robot,
+        this.props.particleNum
+      )
       lastAnim.syncWith(newPose)
       newPose.syncWith()
 
