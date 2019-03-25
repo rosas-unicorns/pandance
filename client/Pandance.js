@@ -2,7 +2,9 @@ import React from 'react'
 import {HemisphericLight, Vector3, ArcRotateCamera} from 'babylonjs'
 import {Engine, Scene} from 'react-babylonjs'
 import PandaModel from './PandaModel'
+import RobotModel from './RobotModel'
 import SoundKey from './SoundKey'
+import DiscoScene from './DiscoScene'
 
 export default class Pandance extends React.Component {
   constructor(props) {
@@ -65,6 +67,8 @@ export default class Pandance extends React.Component {
       skyboxMaterial.diffuseColor = new BABYLON.Color3(0, 0, 0)
       skyboxMaterial.specularColor = new BABYLON.Color3(0, 0, 0)
       skybox.material = skyboxMaterial
+    } else {
+      // scene.clearColor = BABYLON.Color3(0, 0.8, 0)
     }
   }
 
@@ -72,10 +76,16 @@ export default class Pandance extends React.Component {
     return (
       <Engine>
         <Scene onSceneMount={this.onSceneMount}>
-          <PandaModel scene={this.state.scene} />
-          <SoundKey mode={this.props.mode} scene={this.state.scene} />
+          <PandaModel
+            scene={this.state.scene}
+            particle={this.props.particle}
+            particleNum={this.props.particleNum}
+          />
+          <SoundKey scene={this.state.scene} />
         </Scene>
       </Engine>
     )
   }
 }
+
+// <PandaModel scene={this.state.scene} />

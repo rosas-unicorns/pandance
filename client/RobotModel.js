@@ -5,7 +5,7 @@ import * as Mousetrap from 'mousetrap'
 var Rec = require('mousetrap-record')(require('mousetrap'))
 var canvas
 
-export default class PandaModel extends React.Component {
+export default class Robot extends React.Component {
   constructor(props) {
     super(props)
 
@@ -15,22 +15,19 @@ export default class PandaModel extends React.Component {
   onModelLoaded(e) {
     const scene = this.props.scene
     const skeleton = e.skeletons[0]
-    const panda = e.meshes[0]
-
-    // TEXTURE
-    let pandaMat = new BABYLON.StandardMaterial('pandaTexture', scene)
-    pandaMat.diffuseTexture = new BABYLON.Texture(
-      'textures/panda-colors.png',
-      scene
-    )
-    panda.material = pandaMat
+    const robot = e.meshes[0]
+    robot.position = {
+      x: 0,
+      y: -2.5,
+      z: 4
+    }
 
     // PARTICLE
     const particle = () => {
       var particleSystem = new BABYLON.ParticleSystem('particles', 2000, scene)
 
       particleSystem.particleTexture = new BABYLON.Texture(
-        this.props.particle,
+        '/assets/flare.png',
         scene
       )
       var emitterType = new BABYLON.SphereParticleEmitter()
@@ -39,7 +36,7 @@ export default class PandaModel extends React.Component {
 
       particleSystem.particleEmitterType = emitterType
 
-      particleSystem.emitter = panda
+      particleSystem.emitter = robot
 
       particleSystem.color1 = new BABYLON.Color4(0.7, 0.8, 1.0, 1.0)
       particleSystem.color2 = new BABYLON.Color4(0.2, 0.5, 1.0, 1.0)
@@ -51,7 +48,7 @@ export default class PandaModel extends React.Component {
       particleSystem.minLifeTime = 0.3
       particleSystem.maxLifeTime = 1.5
 
-      particleSystem.emitRate = this.props.particleNum
+      particleSystem.emitRate = 1000
 
       particleSystem.blendMode = BABYLON.ParticleSystem.BLENDMODE_ONEONE
 
@@ -92,8 +89,8 @@ export default class PandaModel extends React.Component {
     }
 
     // ALL POSSIBLE POSES
-    var pose1 = scene.beginWeightedAnimation(skeleton, 0, 1, 1, true)
-    var pose2 = scene.beginWeightedAnimation(skeleton, 1, 2, 0, true)
+    var pose1 = scene.beginWeightedAnimation(skeleton, 0, 0, 0, true)
+    var pose2 = scene.beginWeightedAnimation(skeleton, 0, 1, 0, true)
     var pose3 = scene.beginWeightedAnimation(skeleton, 2, 3, 0, true)
     var pose4 = scene.beginWeightedAnimation(skeleton, 3, 4, 0, true)
     var pose5 = scene.beginWeightedAnimation(skeleton, 4, 5, 0, true)
@@ -111,8 +108,6 @@ export default class PandaModel extends React.Component {
     var pose17 = scene.beginWeightedAnimation(skeleton, 16, 17, 0, true)
     var pose18 = scene.beginWeightedAnimation(skeleton, 17, 18, 0, true)
     var pose19 = scene.beginWeightedAnimation(skeleton, 18, 19, 0, true)
-    var pose20 = scene.beginWeightedAnimation(skeleton, 19, 20, 0, true)
-    var pose21 = scene.beginWeightedAnimation(skeleton, 20, 21, 0, true)
     var lastAnim = pose1
 
     // KEY BINDINGS
@@ -125,31 +120,29 @@ export default class PandaModel extends React.Component {
     Mousetrap.bind('u', () => animation(pose8), 'keyup')
     Mousetrap.bind('i', () => animation(pose9), 'keyup')
     Mousetrap.bind('o', () => animation(pose10), 'keyup')
-    Mousetrap.bind('p', () => animation(pose11), 'keyup')
-
-    Mousetrap.bind('a', () => animation(pose12), 'keyup')
-    Mousetrap.bind('s', () => animation(pose13), 'keyup')
-    Mousetrap.bind('d', () => animation(pose14), 'keyup')
-    Mousetrap.bind('f', () => animation(pose15), 'keyup')
-    Mousetrap.bind('g', () => animation(pose16), 'keyup')
-    Mousetrap.bind('h', () => animation(pose17), 'keyup')
-    Mousetrap.bind('j', () => animation(pose18), 'keyup')
-    Mousetrap.bind('k', () => animation(pose19), 'keyup')
-    Mousetrap.bind('l', () => animation(pose20), 'keyup')
-
-    Mousetrap.bind('z', () => animation(pose21), 'keyup')
-    Mousetrap.bind('x', () => animation(pose2), 'keyup')
-    Mousetrap.bind('c', () => animation(pose3), 'keyup')
-    Mousetrap.bind('v', () => animation(pose4), 'keyup')
-    Mousetrap.bind('b', () => animation(pose5), 'keyup')
-    Mousetrap.bind('n', () => animation(pose6), 'keyup')
-    Mousetrap.bind('m', () => animation(pose7), 'keyup')
+    Mousetrap.bind('p', () => animation(pose12), 'keyup')
+    Mousetrap.bind('a', () => animation(pose13), 'keyup')
+    Mousetrap.bind('s', () => animation(pose14), 'keyup')
+    Mousetrap.bind('d', () => animation(pose15), 'keyup')
+    Mousetrap.bind('f', () => animation(pose16), 'keyup')
+    Mousetrap.bind('g', () => animation(pose17), 'keyup')
+    Mousetrap.bind('h', () => animation(pose18), 'keyup')
+    Mousetrap.bind('j', () => animation(pose19), 'keyup')
+    Mousetrap.bind('k', () => animation(pose2), 'keyup')
+    Mousetrap.bind('l', () => animation(pose3), 'keyup')
+    Mousetrap.bind('z', () => animation(pose4), 'keyup')
+    Mousetrap.bind('x', () => animation(pose5), 'keyup')
+    Mousetrap.bind('c', () => animation(pose6), 'keyup')
+    Mousetrap.bind('v', () => animation(pose7), 'keyup')
+    Mousetrap.bind('b', () => animation(pose8), 'keyup')
+    Mousetrap.bind('n', () => animation(pose9), 'keyup')
+    Mousetrap.bind('m', () => animation(pose10), 'keyup')
   }
 
   render() {
     return (
       <Model
-        sceneFilename="panda.babylon"
+        sceneFilename="robot-front.babylon"
         rootUrl="/assets/"
         onModelLoaded={this.onModelLoaded}
       />
