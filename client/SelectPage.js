@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
 import Pandance from './Pandance'
+import DiscoScene from './DiscoScene'
 
 const flare = '/assets/flare.png'
 const bubble = '/assets/bubble.png'
@@ -22,6 +23,7 @@ export default class Selection extends Component {
   }
 
   selectBackground(e) {
+    console.log(e.target)
     this.setState({
       background: e.target.name
     })
@@ -52,7 +54,7 @@ export default class Selection extends Component {
   }
 
   render() {
-    const backgrounds = ['space', 'bubbles']
+    const backgrounds = ['space', 'disco']
     const characterName = ['panda']
     const particle = this.state.particle === 'flare' ? flare : bubble
 
@@ -62,6 +64,10 @@ export default class Selection extends Component {
         background={this.state.background}
         particle={particle}
         particleNum={this.state.particleNum}
+      />,
+      <DiscoScene
+        character={this.state.character}
+        background={this.state.background}
       />
     ]
 
@@ -121,7 +127,7 @@ export default class Selection extends Component {
             </button>
           </div>
         ) : (
-          <div>{scenes[0]}</div>
+          <div>{scenes[1]}</div>
         )}
       </div>
     )
