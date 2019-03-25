@@ -88,7 +88,6 @@ h1 {
 }
 
 .select-items {
-  /* background-color: #1f1ae4; */
   background-color: #fff;
   font-family: 'Nanum Pen Script', cursive;
   font-size: 20px;
@@ -96,13 +95,3 @@ h1 {
   height: 40px;
   margin-bottom: 20px;
 }
-
-/* option {
-  background-color: #1f1ae4;
-  font-family: 'Nanum Pen Script', cursive;
-  font-size: 26px;
-  color: red;
-} */
-/* .select-items select {
-  display: none; /*hide original SELECT element:*/
-/* }  */
