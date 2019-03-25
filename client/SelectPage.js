@@ -12,6 +12,7 @@ export default class Selection extends Component {
       play: false,
       background: 'space',
       character: 'panda',
+      mode: 'ddp',
       particle: 'flare',
       particleNum: 500
     }
@@ -19,6 +20,7 @@ export default class Selection extends Component {
     this.selectBackground = this.selectBackground.bind(this)
     this.selectCharacter = this.selectCharacter.bind(this)
     this.readyToPlay = this.readyToPlay.bind(this)
+    this.selectMode = this.selectMode.bind(this)
     this.changeParticle = this.changeParticle.bind(this)
   }
 
@@ -35,6 +37,12 @@ export default class Selection extends Component {
     })
   }
 
+  selectMode(e) {
+    this.setState({
+      mode: e.target.name
+    })
+  }
+                  
   changeParticle = e => {
     this.setState({
       particle: e.target.value
@@ -56,18 +64,21 @@ export default class Selection extends Component {
   render() {
     const backgrounds = ['space', 'disco']
     const characterName = ['panda']
+    const modes = ['ddp', 'zen']
     const particle = this.state.particle === 'flare' ? flare : bubble
 
     const scenes = [
       <Pandance
         character={this.state.character}
         background={this.state.background}
+        mode={this.state.mode}
         particle={particle}
         particleNum={this.state.particleNum}
       />,
       <DiscoScene
         character={this.state.character}
         background={this.state.background}
+        mode={this.state.mode}
       />
     ]
 
@@ -103,6 +114,21 @@ export default class Selection extends Component {
                 </button>
               )
             })}
+            <h1>Select A Mode</h1>
+            {modes.map((mode, idx) => {
+              return (
+                <button
+                  className="button"
+                  type="button"
+                  key={mode}
+                  name={mode}
+                  onClick={this.selectMode}
+                >
+                  {mode}
+                </button>
+              )
+            })}
+
             <h1>Set Particle</h1>
             Particle:{' '}
             <select
@@ -138,6 +164,7 @@ export default class Selection extends Component {
                 10000
               </option>
             </select>
+
             <button
               className="btn-play"
               type="button"
@@ -147,7 +174,7 @@ export default class Selection extends Component {
             </button>
           </div>
         ) : (
-          <div>{scenes[1]}</div>
+          <div>{scenes[0]}</div>
         )}
       </div>
     )

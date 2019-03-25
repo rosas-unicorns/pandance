@@ -81,7 +81,7 @@ export default class Pandance extends React.Component {
             particle={this.props.particle}
             particleNum={this.props.particleNum}
           />
-          <SoundKey />
+          <SoundKey scene={this.state.scene} />
         </Scene>
       </Engine>
     )
