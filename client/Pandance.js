@@ -72,7 +72,11 @@ export default class Pandance extends React.Component {
     return (
       <Engine>
         <Scene onSceneMount={this.onSceneMount}>
-          <PandaModel scene={this.state.scene} />
+          <PandaModel
+            scene={this.state.scene}
+            particle={this.props.particle}
+            particleNum={this.props.particleNum}
+          />
           <SoundKey />
         </Scene>
       </Engine>
