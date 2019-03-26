@@ -27,7 +27,7 @@ export default class Robot extends React.Component {
       var particleSystem = new BABYLON.ParticleSystem('particles', 2000, scene)
 
       particleSystem.particleTexture = new BABYLON.Texture(
-        this.props.particle,
+        `assets/${this.props.particles}.png`,
         scene
       )
       var emitterType = new BABYLON.SphereParticleEmitter()
@@ -42,13 +42,13 @@ export default class Robot extends React.Component {
       particleSystem.color2 = new BABYLON.Color4(0.2, 0.5, 1.0, 1.0)
       particleSystem.colorDead = new BABYLON.Color4(0, 0, 0.2, 0.0)
 
-      particleSystem.minSize = 0.3
-      particleSystem.maxSize = 0.9
+      particleSystem.minSize = 0.5
+      particleSystem.maxSize = 1.2
 
       particleSystem.minLifeTime = 0.3
-      particleSystem.maxLifeTime = 1.5
+      particleSystem.maxLifeTime = 1
 
-      particleSystem.emitRate = this.props.particleNum
+      particleSystem.emitRate = 500
 
       particleSystem.blendMode = BABYLON.ParticleSystem.BLENDMODE_ONEONE
 

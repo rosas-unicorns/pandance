@@ -55,34 +55,7 @@ export default class DDP extends Component {
 
   // GENERATES KEYS IN PANEL
   play() {
-    const letters = [
-      'a',
-      'b',
-      'c',
-      'd',
-      'e',
-      'f',
-      'g',
-      'h',
-      'i',
-      'j',
-      'k',
-      'l',
-      'm',
-      'n',
-      'o',
-      'p',
-      'q',
-      'r',
-      's',
-      't',
-      'u',
-      'v',
-      'w',
-      'x',
-      'y',
-      'z'
-    ]
+    const letters = 'abcdefghijklmnopqrstuvwxyz'
     const chosenLetter = letters[Math.floor(Math.random() * 26)]
     let clicked = false
 
@@ -133,6 +106,8 @@ export default class DDP extends Component {
           gameOver.color = 'red'
           gameOver.fontSize = 100
           this.advancedTexture.addControl(gameOver)
+
+          this.gameOver = gameOver
         } else {
           this.setState({
             lives: this.state.lives - 1,
@@ -166,6 +141,7 @@ export default class DDP extends Component {
     this.advancedTexture.removeControl(this.panel)
     this.advancedTexture.removeControl(this.score)
     this.advancedTexture.removeControl(this.lives)
+    if (this.gameOver) this.advancedTexture.removeControl(this.gameOver)
     clearInterval(this.interval)
   }
 
