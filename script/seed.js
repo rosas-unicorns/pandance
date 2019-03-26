@@ -1,44 +1,36 @@
 'use strict'
 
-const db = require('../server/db')
-const {User} = require('../server/db/models')
+const {db} = require('../server/db')
+const {Score} = require('../server/db')
 
-async function seed() {
+const seed = async () => {
   await db.sync({force: true})
   console.log('db synced!')
 
-  const users = await Promise.all([
-    User.create({email: 'cody@email.com', password: '123'}),
-    User.create({email: 'murphy@email.com', password: '123'})
+  const scores = await Promise.all([
+    Score.create({name: 'cody', score: 10}),
+    Score.create({name: 'tati', score: 20}),
+    Score.create({name: 'jain', score: 100}),
+    Score.create({name: 'jia', score: 102}),
+    Score.create({name: 'alex', score: 130}),
+    Score.create({name: 'kate', score: 14}),
+    Score.create({name: 'fil', score: 220}),
+    Score.create({name: 'jia', score: 100}),
+    Score.create({name: 'jia', score: 190}),
+    Score.create({name: 'jia', score: 100}),
+    Score.create({name: 'jia', score: 302}),
+    Score.create({name: 'jia', score: 45}),
+    Score.create({name: 'jia', score: 100}),
+    Score.create({name: 'jia', score: 100})
   ])
 
-  console.log(`seeded ${users.length} users`)
+  console.log(`seeded ${scores.length} scores`)
   console.log(`seeded successfully`)
+  db.close()
 }
 
-// We've separated the `seed` function from the `runSeed` function.
-// This way we can isolate the error handling and exit trapping.
-// The `seed` function is concerned only with modifying the database.
-async function runSeed() {
-  console.log('seeding...')
-  try {
-    await seed()
-  } catch (err) {
-    console.error(err)
-    process.exitCode = 1
-  } finally {
-    console.log('closing db connection')
-    await db.close()
-    console.log('db connection closed')
-  }
-}
-
-// Execute the `seed` function, IF we ran this module directly (`node seed`).
-// `Async` functions always return a promise, so we can use `catch` to handle
-// any errors that might occur inside of `seed`.
-if (module === require.main) {
-  runSeed()
-}
-
-// we export the seed function for testing purposes (see `./seed.spec.js`)
-module.exports = seed
+seed().catch(err => {
+  console.err('no')
+  console.err(err)
+  db.close()
+})
