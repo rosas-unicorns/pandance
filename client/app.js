@@ -1,9 +1,15 @@
 import React, {Component} from 'react'
-import Selection from './SelectPage'
+import Sidenav from './Sidenav'
+import Scenes from './Scenes'
 
 class App extends Component {
   render() {
-    return <Selection />
+    return (
+      <div id="full">
+        <Sidenav />
+        <Scenes />
+      </div>
+    )
   }
 }
 

@@ -47,6 +47,14 @@ export default class Zen extends Component {
     pauseBtn.paddingTop = '5px'
     pauseBtn.onPointerUpObservable.add(this.pause)
     panel.addControl(pauseBtn)
+
+    this.advancedTexture = advancedTexture
+    this.panel = panel
+  }
+
+  componentWillUnmount() {
+    this.advancedTexture.removeControl(this.panel)
+    this.setState({paused: true})
   }
 
   recordSequence() {

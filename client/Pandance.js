@@ -68,26 +68,18 @@ export default class Pandance2 extends React.Component {
     cameraArc.attachControl(canvas, true)
 
     // OPTION TO PASS DOWN
-    if (this.props.background === 'space') {
-      var skybox = BABYLON.MeshBuilder.CreateBox(
-        'skyBox',
-        {size: 1000.0},
-        scene
-      )
-      var skyboxMaterial = new BABYLON.StandardMaterial('skyBox', scene)
-      skyboxMaterial.backFaceCulling = false
-      skyboxMaterial.reflectionTexture = new BABYLON.CubeTexture(
-        'textures/space',
-        scene
-      )
-      skyboxMaterial.reflectionTexture.coordinatesMode =
-        BABYLON.Texture.SKYBOX_MODE
-      skyboxMaterial.diffuseColor = new BABYLON.Color3(0, 0, 0)
-      skyboxMaterial.specularColor = new BABYLON.Color3(0, 0, 0)
-      skybox.material = skyboxMaterial
-    } else {
-      // scene.clearColor = BABYLON.Color3(0, 0.8, 0)
-    }
+    var skybox = BABYLON.MeshBuilder.CreateBox('skyBox', {size: 1000.0}, scene)
+    var skyboxMaterial = new BABYLON.StandardMaterial('skyBox', scene)
+    skyboxMaterial.backFaceCulling = false
+    skyboxMaterial.reflectionTexture = new BABYLON.CubeTexture(
+      'textures/space',
+      scene
+    )
+    skyboxMaterial.reflectionTexture.coordinatesMode =
+      BABYLON.Texture.SKYBOX_MODE
+    skyboxMaterial.diffuseColor = new BABYLON.Color3(0, 0, 0)
+    skyboxMaterial.specularColor = new BABYLON.Color3(0, 0, 0)
+    skybox.material = skyboxMaterial
   }
 
   render() {
