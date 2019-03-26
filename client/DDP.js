@@ -141,7 +141,7 @@ export default class DDP extends Component {
     this.advancedTexture.removeControl(this.panel)
     this.advancedTexture.removeControl(this.score)
     this.advancedTexture.removeControl(this.lives)
-    this.advancedTexture.removeControl(this.gameOver)
+    if (this.gameOver) this.advancedTexture.removeControl(this.gameOver)
     clearInterval(this.interval)
   }
 
