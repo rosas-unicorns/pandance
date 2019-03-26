@@ -1,37 +1,26 @@
 import React from 'react'
-import {Engine, Scene, GUI} from 'react-babylonjs'
+import {Engine} from 'react-babylonjs'
 import DiscoScene from './DiscoScene'
 import Pandance from './Pandance'
-import {SetStateAction} from 'babylonjs'
+import {connect} from 'react-redux'
 
-export default class Scenes extends React.Component {
+class Scenes extends React.Component {
   constructor(props) {
     super(props)
-    this.state = {
-      scene: 'panda'
-    }
-
-    this.switchScenes = this.switchScenes.bind(this)
-  }
-
-  switchScenes(pos, e) {
-    this.setState({scene: e.target.name})
   }
 
   render() {
     return (
-      <Engine>
+      <Engine canvasId="game">
         {(() => {
-          switch (this.state.scene) {
-            case 'panda':
+          switch (this.props.background) {
+            case 'space':
               return (
                 <Pandance
                   character={this.props.character}
                   background={this.props.background}
                   mode={this.props.mode}
-                  particle={this.props.particle}
-                  particleNum={this.props.particleNum}
-                  switchScenes={this.switchScenes}
+                  particles={this.props.particles}
                 />
               )
             case 'disco':
@@ -40,9 +29,7 @@ export default class Scenes extends React.Component {
                   character={this.props.character}
                   background={this.props.background}
                   mode={this.props.mode}
-                  particle={this.props.particle}
-                  particleNum={this.props.particleNum}
-                  switchScenes={this.switchScenes}
+                  particles={this.props.particles}
                 />
               )
           }
@@ -51,3 +38,14 @@ export default class Scenes extends React.Component {
     )
   }
 }
+
+const mapStateToProps = state => {
+  return {
+    background: state.toggle.background,
+    particles: state.toggle.particles,
+    character: state.toggle.character,
+    mode: state.toggle.mode
+  }
+}
+
+export default connect(mapStateToProps)(Scenes)

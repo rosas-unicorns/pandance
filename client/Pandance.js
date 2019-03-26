@@ -29,24 +29,6 @@ export default class Pandance2 extends React.Component {
   }
 
   initEnvironment(canvas, scene) {
-    // *****************************************
-    // button
-    var advancedTexture = BABYLON.GUI.AdvancedDynamicTexture.CreateFullscreenUI(
-      'UI'
-    )
-    var button = BABYLON.GUI.Button.CreateSimpleButton(
-      'disco',
-      'Scene ' + (this.state.clicks + 1) % 2
-    )
-    button.width = 0.2
-    button.height = '40px'
-    button.color = 'white'
-    button.background = 'green'
-    button.verticalAlignment = BABYLON.GUI.Control.VERTICAL_ALIGNMENT_BOTTOM
-
-    button.onPointerUpObservable.add(this.props.switchScenes)
-    advancedTexture.addControl(button)
-    // **********************************************
     // LIGHTS
     let light = new HemisphericLight('hemi', new Vector3(0, 1, 0), scene)
     light.diffuse = new BABYLON.Color3(0.95, 0.95, 1)
@@ -68,26 +50,18 @@ export default class Pandance2 extends React.Component {
     cameraArc.attachControl(canvas, true)
 
     // OPTION TO PASS DOWN
-    if (this.props.background === 'space') {
-      var skybox = BABYLON.MeshBuilder.CreateBox(
-        'skyBox',
-        {size: 1000.0},
-        scene
-      )
-      var skyboxMaterial = new BABYLON.StandardMaterial('skyBox', scene)
-      skyboxMaterial.backFaceCulling = false
-      skyboxMaterial.reflectionTexture = new BABYLON.CubeTexture(
-        'textures/space',
-        scene
-      )
-      skyboxMaterial.reflectionTexture.coordinatesMode =
-        BABYLON.Texture.SKYBOX_MODE
-      skyboxMaterial.diffuseColor = new BABYLON.Color3(0, 0, 0)
-      skyboxMaterial.specularColor = new BABYLON.Color3(0, 0, 0)
-      skybox.material = skyboxMaterial
-    } else {
-      // scene.clearColor = BABYLON.Color3(0, 0.8, 0)
-    }
+    var skybox = BABYLON.MeshBuilder.CreateBox('skyBox', {size: 1000.0}, scene)
+    var skyboxMaterial = new BABYLON.StandardMaterial('skyBox', scene)
+    skyboxMaterial.backFaceCulling = false
+    skyboxMaterial.reflectionTexture = new BABYLON.CubeTexture(
+      'textures/space',
+      scene
+    )
+    skyboxMaterial.reflectionTexture.coordinatesMode =
+      BABYLON.Texture.SKYBOX_MODE
+    skyboxMaterial.diffuseColor = new BABYLON.Color3(0, 0, 0)
+    skyboxMaterial.specularColor = new BABYLON.Color3(0, 0, 0)
+    skybox.material = skyboxMaterial
   }
 
   render() {

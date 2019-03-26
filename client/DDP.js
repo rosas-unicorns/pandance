@@ -162,6 +162,13 @@ export default class DDP extends Component {
     })
   }
 
+  componentWillUnmount() {
+    this.advancedTexture.removeControl(this.panel)
+    this.advancedTexture.removeControl(this.score)
+    this.advancedTexture.removeControl(this.lives)
+    clearInterval(this.interval)
+  }
+
   render() {
     return null
   }
