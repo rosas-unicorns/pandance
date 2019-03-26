@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import Pandance from './Pandance'
 import DiscoScene from './DiscoScene'
+import Scenes from './Scenes'
 
 const flare = '/assets/flare.png'
 const bubble = '/assets/bubble.png'
@@ -42,7 +43,7 @@ export default class Selection extends Component {
       mode: e.target.name
     })
   }
-                  
+
   changeParticle = e => {
     this.setState({
       particle: e.target.value
@@ -132,7 +133,6 @@ export default class Selection extends Component {
                 </button>
               )
             })}
-
             <h1>Set Particle</h1>
             Particle:{' '}
             <select
@@ -168,7 +168,6 @@ export default class Selection extends Component {
                 10000
               </option>
             </select>
-
             <button
               className="btn-play"
               type="button"
@@ -178,7 +177,16 @@ export default class Selection extends Component {
             </button>
           </div>
         ) : (
-          <div>{scenes[background]}</div>
+          <div>
+            {' '}
+            <Scenes
+              character={this.state.character}
+              background={this.state.background}
+              mode={this.state.mode}
+              particle={particle}
+              particleNum={this.state.particleNum}
+            />{' '}
+          </div>
         )}
       </div>
     )

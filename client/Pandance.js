@@ -1,11 +1,12 @@
 import React from 'react'
 import {HemisphericLight, Vector3, ArcRotateCamera} from 'babylonjs'
-import {Engine, Scene} from 'react-babylonjs'
+import {Engine, Scene, GUI} from 'react-babylonjs'
 import PandaModel from './PandaModel'
 import RobotModel from './RobotModel'
 import SoundKey from './SoundKey'
+import DiscoScene from './DiscoScene'
 
-export default class Pandance extends React.Component {
+export default class Pandance2 extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -28,6 +29,24 @@ export default class Pandance extends React.Component {
   }
 
   initEnvironment(canvas, scene) {
+    // *****************************************
+    // button
+    var advancedTexture = BABYLON.GUI.AdvancedDynamicTexture.CreateFullscreenUI(
+      'UI'
+    )
+    var button = BABYLON.GUI.Button.CreateSimpleButton(
+      'disco',
+      'Scene ' + (this.state.clicks + 1) % 2
+    )
+    button.width = 0.2
+    button.height = '40px'
+    button.color = 'white'
+    button.background = 'green'
+    button.verticalAlignment = BABYLON.GUI.Control.VERTICAL_ALIGNMENT_BOTTOM
+
+    button.onPointerUpObservable.add(this.props.switchScenes)
+    advancedTexture.addControl(button)
+    // **********************************************
     // LIGHTS
     let light = new HemisphericLight('hemi', new Vector3(0, 1, 0), scene)
     light.diffuse = new BABYLON.Color3(0.95, 0.95, 1)
@@ -73,25 +92,22 @@ export default class Pandance extends React.Component {
 
   render() {
     return (
-      <Engine>
-        <Scene onSceneMount={this.onSceneMount}>
-          {this.props.character === 'panda' ? (
-            <PandaModel
-              scene={this.state.scene}
-              particle={this.props.particle}
-              particleNum={this.props.particleNum}
-            />
-          ) : (
-            <RobotModel
-              scene={this.state.scene}
-              particle={this.props.particle}
-              particleNum={this.props.particleNum}
-            />
-          )}
-  
-          <SoundKey scene={this.state.scene} mode={this.props.mode}/>
-        </Scene>
-      </Engine>
+      <Scene onSceneMount={this.onSceneMount}>
+        {this.props.character === 'panda' ? (
+          <PandaModel
+            scene={this.state.scene}
+            particle={this.props.particle}
+            particleNum={this.props.particleNum}
+          />
+        ) : (
+          <RobotModel
+            scene={this.state.scene}
+            particle={this.props.particle}
+            particleNum={this.props.particleNum}
+          />
+        )}
+        <SoundKey scene={this.state.scene} mode={this.props.mode} />
+      </Scene>
     )
   }
 }
