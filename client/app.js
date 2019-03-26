@@ -1,10 +1,15 @@
 import React, {Component} from 'react'
-import Selection from './SelectPage'
-import Score from './Score'
+import Sidenav from './Sidenav'
+import Scenes from './Scenes'
 
 class App extends Component {
   render() {
-    return <Score />
+    return (
+      <div id="full">
+        <Sidenav />
+        <Scenes />
+      </div>
+    )
   }
 }
 

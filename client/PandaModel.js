@@ -1,9 +1,6 @@
 import React from 'react'
 import {Model} from 'react-babylonjs'
-import * as GUI from 'babylonjs-gui'
 import * as Mousetrap from 'mousetrap'
-var Rec = require('mousetrap-record')(require('mousetrap'))
-var canvas
 
 export default class PandaModel extends React.Component {
   constructor(props) {
@@ -30,7 +27,7 @@ export default class PandaModel extends React.Component {
       var particleSystem = new BABYLON.ParticleSystem('particles', 2000, scene)
 
       particleSystem.particleTexture = new BABYLON.Texture(
-        this.props.particle,
+        `assets/${this.props.particles}.png`,
         scene
       )
       var emitterType = new BABYLON.SphereParticleEmitter()
@@ -51,7 +48,7 @@ export default class PandaModel extends React.Component {
       particleSystem.minLifeTime = 0.3
       particleSystem.maxLifeTime = 1.5
 
-      particleSystem.emitRate = this.props.particleNum
+      particleSystem.emitRate = 500
 
       particleSystem.blendMode = BABYLON.ParticleSystem.BLENDMODE_ONEONE
 
