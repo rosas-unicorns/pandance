@@ -33,27 +33,6 @@ export default class DiscoScene extends React.Component {
   }
 
   initEnvironment(canvas, scene) {
-    // Toggle button
-    // *****************************************
-    // button
-    var advancedTexture = BABYLON.GUI.AdvancedDynamicTexture.CreateFullscreenUI(
-      'UI'
-    )
-    var button = BABYLON.GUI.Button.CreateSimpleButton(
-      'panda',
-      'Scene ' + (this.state.clicks + 1) % 2
-    )
-    button.width = 0.2
-    button.height = '40px'
-    button.color = 'white'
-    button.background = 'green'
-    button.verticalAlignment = BABYLON.GUI.Control.VERTICAL_ALIGNMENT_BOTTOM
-    advancedTexture.addControl(button)
-
-    button.onPointerUpObservable.add(this.props.switchScenes)
-    advancedTexture.addControl(button)
-    // **********************************************
-
     // LIGHTS
     var light = new BABYLON.HemisphericLight(
       'light1',
@@ -269,14 +248,12 @@ export default class DiscoScene extends React.Component {
         {this.props.character === 'panda' ? (
           <PandaModel
             scene={this.state.scene}
-            particle={this.props.particle}
-            particleNum={this.props.particleNum}
+            particles={this.props.particles}
           />
         ) : (
           <RobotModel
             scene={this.state.scene}
-            particle={this.props.particle}
-            particleNum={this.props.particleNum}
+            particles={this.props.particles}
           />
         )}
         <SoundKey scene={this.state.scene} mode={this.props.mode} />

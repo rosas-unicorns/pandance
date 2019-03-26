@@ -42,11 +42,11 @@ export default class PandaModel extends React.Component {
       particleSystem.color2 = new BABYLON.Color4(0.2, 0.5, 1.0, 1.0)
       particleSystem.colorDead = new BABYLON.Color4(0, 0, 0.2, 0.0)
 
-      particleSystem.minSize = 0.3
-      particleSystem.maxSize = 0.9
+      particleSystem.minSize = 0.5
+      particleSystem.maxSize = 1.2
 
       particleSystem.minLifeTime = 0.3
-      particleSystem.maxLifeTime = 1.5
+      particleSystem.maxLifeTime = 1
 
       particleSystem.emitRate = 500
 
