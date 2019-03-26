@@ -40,9 +40,9 @@ class Sidenav extends React.Component {
     return (
       <div>
         <div id="sidenav">
-          <a href="/" className="closebtn" onClick={this.closeNav}>
-            ✖
-          </a>
+          <i className="material-icons" id="closeNav" onClick={this.closeNav}>
+            close
+          </i>
           <h1>Selection Menu</h1>
           <h3>
             Game Mode <i className="material-icons">info_outline</i>

@@ -60,12 +60,19 @@ canvas,
   transition: 0.5s;
 }
 
-#sidenav .closebtn {
+#closeNav {
   position: absolute;
   top: 0;
   right: 10px;
   font-size: 36px;
   margin-left: 50px;
+  color: #ffffff7c;
+  transition: 0.5s;
+}
+
+#closeNav:hover {
+  color: #ffffffd8;
+  cursor: pointer;
 }
 
 #openNav {
