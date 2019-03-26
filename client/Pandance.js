@@ -29,6 +29,24 @@ export default class Pandance2 extends React.Component {
   }
 
   initEnvironment(canvas, scene) {
+    // *****************************************
+    // button
+    var advancedTexture = BABYLON.GUI.AdvancedDynamicTexture.CreateFullscreenUI(
+      'UI'
+    )
+    var button = BABYLON.GUI.Button.CreateSimpleButton(
+      'disco',
+      'Scene ' + (this.state.clicks + 1) % 2
+    )
+    button.width = 0.2
+    button.height = '40px'
+    button.color = 'white'
+    button.background = 'green'
+    button.verticalAlignment = BABYLON.GUI.Control.VERTICAL_ALIGNMENT_BOTTOM
+
+    button.onPointerUpObservable.add(this.props.switchScenes)
+    advancedTexture.addControl(button)
+    // **********************************************
     // LIGHTS
     let light = new HemisphericLight('hemi', new Vector3(0, 1, 0), scene)
     light.diffuse = new BABYLON.Color3(0.95, 0.95, 1)
