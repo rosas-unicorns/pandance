@@ -33,6 +33,8 @@ class Scenes extends React.Component {
                   background={this.props.background}
                   mode={this.props.mode}
                   particles={this.props.particles}
+                  addScore={this.props.addScore}
+                  name={this.props.name}
                 />
               )
           }

@@ -256,7 +256,12 @@ export default class DiscoScene extends React.Component {
             particles={this.props.particles}
           />
         )}
-        <SoundKey scene={this.state.scene} mode={this.props.mode} />
+        <SoundKey
+          scene={this.state.scene}
+          mode={this.props.mode}
+          addScore={this.props.addScore}
+          name={this.props.name}
+        />
       </Scene>
     )
   }
