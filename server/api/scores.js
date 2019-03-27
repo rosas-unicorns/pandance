@@ -18,17 +18,19 @@ router.put('/', async (req, res, next) => {
       order: [['score', 'ASC']]
     })
 
-    await Score.update(
-      {
-        score: req.body.score,
-        name: req.body.name
-      },
-      {
-        where: {
-          score: scores[0].score
+    if (req.body.score > scores[0].score) {
+      await Score.update(
+        {
+          score: req.body.score,
+          name: req.body.name
+        },
+        {
+          where: {
+            id: scores[0].id
+          }
         }
-      }
-    )
+      )
+    }
     res.sendStatus(204)
   } catch (err) {
     next(err)

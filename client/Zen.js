@@ -74,7 +74,6 @@ export default class Zen extends Component {
       this.setState({paused: false})
     }
     const trigger = () => {
-      console.log(arr[0])
       Mousetrap.trigger(arr[0])
       let newArr = arr.slice(1)
       newArr.push(arr[0])

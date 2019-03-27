@@ -100,7 +100,6 @@ export default class DDP extends Component {
   }
 
   render() {
-    console.log(this.state.mode)
     if (this.state.mode)
       return (
         <DDPGameplay
@@ -108,6 +107,8 @@ export default class DDP extends Component {
           changeMode={this.changeMode}
           advancedTexture={this.state.advancedTexture}
           scene={this.props.scene}
+          addScore={this.props.addScore}
+          name={this.props.name}
         />
       )
     else return null
