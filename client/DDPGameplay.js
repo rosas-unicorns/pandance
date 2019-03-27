@@ -15,28 +15,11 @@ export default class DDPGameplay extends Component {
 
     this.playSurvival = this.playSurvival.bind(this)
     this.playTimed = this.playTimed.bind(this)
+    this.shuffle = this.shuffle.bind(this)
   }
 
   componentDidMount() {
     this.advancedTexture = this.props.advancedTexture
-
-    let gameOverScreen = new BABYLON.GUI.StackPanel()
-    gameOverScreen.isVisible = false
-    this.advancedTexture.addControl(gameOverScreen)
-
-    let replay = new BABYLON.GUI.Button.CreateSimpleButton('', 'REPLAY')
-    replay.width = '150px'
-    replay.height = '65px'
-    replay.background = '#454251'
-    replay.color = '#fff'
-    replay.paddingTop = '10px'
-    replay.paddingBottom = '10px'
-    replay.thickness = 0
-    replay.cornerRadius = 5
-    replay.pointerEnterAnimation = () => (replay.background = '#54515b')
-    replay.pointerOutAnimation = () => (replay.background = '#454251')
-    replay.onPointerUpObservable.add(this.props.changeMode)
-    gameOverScreen.addControl(replay)
 
     if (this.props.mode === 'survival') {
       // KEYS TO PRESS CONTAINER
@@ -65,13 +48,6 @@ export default class DDPGameplay extends Component {
       lives.color = '#fff'
       lives.fontSize = 24
       this.advancedTexture.addControl(lives)
-
-      let gameOver = new BABYLON.GUI.TextBlock()
-      gameOver.text = 'GAME OVER'
-      gameOver.color = 'red'
-      gameOver.fontSize = 100
-      gameOver.height = '100px'
-      gameOverScreen.addControl(gameOver)
 
       this.lives = lives
       this.time = time
@@ -109,13 +85,6 @@ export default class DDPGameplay extends Component {
       score.fontSize = 24
       this.advancedTexture.addControl(score)
 
-      let timesUp = new BABYLON.GUI.TextBlock()
-      timesUp.text = "TIME'S UP"
-      timesUp.color = 'red'
-      timesUp.fontSize = 100
-      timesUp.height = '100px'
-      gameOverScreen.addControl(timesUp)
-
       this.score = score
       this.time = time
       this.panel = panel
@@ -126,12 +95,53 @@ export default class DDPGameplay extends Component {
       )
     }
 
+    let gameOverScreen = new BABYLON.GUI.StackPanel()
+    gameOverScreen.isVisible = false
+    this.advancedTexture.addControl(gameOverScreen)
+
+    let gameOver = new BABYLON.GUI.TextBlock()
+    gameOver.text = 'GAME OVER'
+    gameOver.color = 'red'
+    gameOver.fontSize = 100
+    gameOver.height = '100px'
+    gameOverScreen.addControl(gameOver)
+
+    let replay = new BABYLON.GUI.Button.CreateSimpleButton('', 'REPLAY')
+    replay.width = '150px'
+    replay.height = '65px'
+    replay.background = '#454251'
+    replay.color = '#fff'
+    replay.paddingTop = '10px'
+    replay.paddingBottom = '10px'
+    replay.thickness = 0
+    replay.cornerRadius = 5
+    replay.pointerEnterAnimation = () => (replay.background = '#54515b')
+    replay.pointerOutAnimation = () => (replay.background = '#454251')
+    replay.onPointerUpObservable.add(this.props.changeMode)
+    gameOverScreen.addControl(replay)
+
     this.gameOverScreen = gameOverScreen
+    this.letters = this.shuffle()
+    this.num = 26
+  }
+
+  shuffle() {
+    let letters = 'abcdefghijklmnopqrstuvwxyz'.split(''),
+      len = letters.length
+
+    for (let i = len - 1; i > 0; i--) {
+      let j = Math.floor(Math.random() * (i + 1))
+      let tmp = letters[i]
+      letters[i] = letters[j]
+      letters[j] = tmp
+    }
+    return letters.join('')
   }
 
   playTimed() {
-    const letters = 'abcdefghijklmnopqrstuvwxyz'
-    const chosenLetter = letters[Math.floor(Math.random() * 26)]
+    const chosenLetter = this.letters[Math.floor(Math.random() * 26)]
+
+    this.setState({keyOrder: [chosenLetter]})
 
     let key = new BABYLON.GUI.Button.CreateSimpleButton(
       'key',
@@ -145,25 +155,24 @@ export default class DDPGameplay extends Component {
     this.panel.addControl(key)
 
     Mousetrap.bind(chosenLetter, e => {
-      this.panel.removeControl(key)
-      if (this.state.countdown > 0) this.playTimed()
+      if (e.key === this.state.keyOrder[0]) {
+        this.panel.removeControl(key)
 
-      this.setState({
-        score: this.state.score + 1
-      })
+        this.setState({
+          score: this.state.score + 1,
+          keyOrder: []
+        })
 
-      this.score.text = `Score: ${this.state.score}`
+        if (this.state.countdown > 0) this.playTimed()
+
+        this.score.text = `Score: ${this.state.score}`
+      }
     })
-
-    if (this.state.countdown <= 0) {
-      clearInterval(this.interval)
-      this.gameOverScreen.isVisible = true
-    }
   }
 
   playSurvival() {
-    const letters = 'abcdefghijklmnopqrstuvwxyz'
-    const chosenLetter = letters[Math.floor(Math.random() * 26)]
+    const chosenLetter = this.letters[this.num % 26]
+    this.num++
     let clicked = false
 
     this.setState({keyOrder: [...this.state.keyOrder, chosenLetter]})
@@ -235,8 +244,8 @@ export default class DDPGameplay extends Component {
       clearInterval(this.interval)
       this.gameOverScreen.isVisible = true
     } else {
-      if (this.state.time % 10 === 0 && this.state.timeInterval > 100) {
-        this.setState({timeInterval: timeInterval - 75})
+      if (this.state.time % 5 === 0 && this.state.timeInterval > 200) {
+        this.setState({timeInterval: this.state.timeInterval - 50})
       }
       setTimeout(this.playSurvival, this.state.timeInterval)
     }
@@ -245,8 +254,13 @@ export default class DDPGameplay extends Component {
   componentWillUpdate() {
     if (this.props.mode === 'survival')
       this.time.text = `Time: ${this.state.time}s`
-    else if (this.props.mode === 'timed')
+    else if (this.props.mode === 'timed') {
       this.time.text = `Time: ${this.state.countdown}s`
+      if (this.state.countdown <= 0) {
+        this.gameOverScreen.isVisible = true
+        clearInterval(this.interval)
+      }
+    }
   }
 
   componentWillUnmount() {
