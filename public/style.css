@@ -15,10 +15,14 @@ canvas,
   padding: 0;
 }
 
+canvas {
+  overflow: hidden;
+}
+
 /* SIDE NAVBAR */
 #sidenav {
   height: 100%;
-  width: 240px;
+  width: 250px;
   position: fixed;
   z-index: 2;
   top: 0;
@@ -99,6 +103,7 @@ label {
   font-weight: bold;
   padding-left: 10px;
   transition: 0.3s;
+  font-size: 14px;
 }
 
 label:hover {
@@ -134,4 +139,54 @@ table {
 
 .top-score-label {
   padding-left: 0;
+}
+
+#name-input::placeholder {
+  color: #7b7680 !important;
+}
+
+#name-input {
+  color: #c5bfd3 !important;
+}
+
+form h1 {
+  background-color: transparent;
+  margin: 0;
+  margin-top: 10px;
+}
+
+[type='radio']:checked + span:after,
+[type='radio'].with-gap:checked + span:after {
+  background-color: #be8dda;
+}
+
+[type='radio']:checked + span:after,
+[type='radio'].with-gap:checked + span:before,
+[type='radio'].with-gap:checked + span:after {
+  border: #be8dda;
+}
+
+[type='radio']:not(:checked) + span,
+[type='radio']:checked + span {
+  padding-left: 25px;
+  font-size: 13px;
+}
+
+/********* MESSAGE SCROLLBAR *********/
+::-webkit-scrollbar {
+  width: 10px;
+  height: fit-content;
+}
+
+::-webkit-scrollbar-track {
+  background: none;
+}
+
+::-webkit-scrollbar-thumb {
+  height: 15px;
+  background-color: #4c4a4d;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: #403f41;
 }
