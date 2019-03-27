@@ -8,16 +8,16 @@ const seed = async () => {
   console.log('db synced!')
 
   const scores = await Promise.all([
-    Score.create({name: 'cody', score: 5}),
-    Score.create({name: 'cody', score: 5}),
-    Score.create({name: 'cody', score: 5}),
-    Score.create({name: 'cody', score: 5}),
-    Score.create({name: 'cody', score: 5}),
-    Score.create({name: 'cody', score: 5}),
-    Score.create({name: 'cody', score: 5}),
-    Score.create({name: 'cody', score: 5}),
-    Score.create({name: 'cody', score: 5}),
-    Score.create({name: 'cody', score: 5})
+    Score.create({name: 'cody', score: 0}),
+    Score.create({name: 'cody', score: 0}),
+    Score.create({name: 'cody', score: 0}),
+    Score.create({name: 'cody', score: 0}),
+    Score.create({name: 'cody', score: 0}),
+    Score.create({name: 'cody', score: 0}),
+    Score.create({name: 'cody', score: 0}),
+    Score.create({name: 'cody', score: 0}),
+    Score.create({name: 'cody', score: 0}),
+    Score.create({name: 'cody', score: 0})
   ])
 
   console.log(`seeded ${scores.length} scores`)
