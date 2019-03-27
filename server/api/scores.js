@@ -12,10 +12,10 @@ router.get('/', async (req, res, next) => {
   }
 })
 
-router.post('/', async (req, res, next) => {
+router.put('/', async (req, res, next) => {
   try {
-    const score = await Score.create()
-    res.json(score)
+    const userId = req.params.id
+    const user = await Score.findById(userId)
   } catch (err) {
     next(err)
   }
