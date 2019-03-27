@@ -31,7 +31,7 @@ class Sidenav extends React.Component {
   }
 
   openNav() {
-    document.getElementById('sidenav').style.width = '240px'
+    document.getElementById('sidenav').style.width = '250px'
   }
 
   closeNav() {
@@ -46,10 +46,12 @@ class Sidenav extends React.Component {
             close
           </i>
           <form>
+            <h1>Your Name</h1>
             <input
               type="text"
               name="userName"
-              placeholder="player name"
+              id="name-input"
+              placeholder="enter name here"
               onChange={e => this.props.changeName(e.target.value)}
             />
           </form>

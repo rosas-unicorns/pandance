@@ -18,7 +18,7 @@ canvas,
 /* SIDE NAVBAR */
 #sidenav {
   height: 100%;
-  width: 240px;
+  width: 250px;
   position: fixed;
   z-index: 2;
   top: 0;
@@ -134,4 +134,34 @@ table {
 
 .top-score-label {
   padding-left: 0;
+}
+
+#name-input::placeholder {
+  color: #7b7680 !important;
+}
+
+#name-input {
+  color: #c5bfd3 !important;
+}
+
+form h1 {
+  background-color: transparent;
+  margin: 0;
+  margin-top: 10px;
+}
+
+[type='radio']:checked + span:after,
+[type='radio'].with-gap:checked + span:after {
+  background-color: #be8dda;
+}
+
+[type='radio']:checked + span:after,
+[type='radio'].with-gap:checked + span:before,
+[type='radio'].with-gap:checked + span:after {
+  border: #be8dda;
+}
+
+[type='radio']:not(:checked) + span,
+[type='radio']:checked + span {
+  padding-left: 30px;
 }
