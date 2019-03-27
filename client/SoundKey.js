@@ -44,6 +44,13 @@ export default class SoundKey extends Component {
 
   render() {
     if (this.props.mode === 'zen') return <Zen />
-    else if (this.props.mode === 'ddp') return <DDP scene={this.props.scene} />
+    else if (this.props.mode === 'ddp')
+      return (
+        <DDP
+          scene={this.props.scene}
+          addScore={this.props.addScore}
+          name={this.props.name}
+        />
+      )
   }
 }

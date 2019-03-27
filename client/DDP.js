@@ -1,16 +1,17 @@
 import React, {Component} from 'react'
 import * as Mousetrap from 'mousetrap'
+import DDPGameplay from './DDPGameplay'
 
 export default class DDP extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      score: 0,
-      lives: 3,
-      keyOrder: []
+      mode: '',
+      advancedTexture: null
     }
 
-    this.play = this.play.bind(this)
+    this.createButton = this.createButton.bind(this)
+    this.changeMode = this.changeMode.bind(this)
   }
 
   componentDidMount() {
@@ -18,134 +19,97 @@ export default class DDP extends Component {
       'UI'
     )
 
-    // KEYS TO PRESS CONTAINER
-    let panel = new BABYLON.GUI.Rectangle()
-    panel.verticalAlignment = BABYLON.GUI.Control.VERTICALALIGNMENT_TOP
-    panel.width = '800px'
-    panel.height = '60px'
-    panel.thickness = 0
-    panel.background = '#ffffff4b'
-    advancedTexture.addControl(panel)
+    // GAME MODE SELECTION SCREEN
+    let modeSelectScreen = new BABYLON.GUI.StackPanel()
+    modeSelectScreen.background = '#666270'
+    modeSelectScreen.width = '450px'
+    modeSelectScreen.height = '300px'
+    advancedTexture.addControl(modeSelectScreen)
 
-    let score = new BABYLON.GUI.TextBlock()
-    score.textVerticalAlignment = BABYLON.GUI.Control.VERTICAL_ALIGNMENT_TOP
-    score.top = '62px'
-    score.left = '400px'
-    score.text = `Score: ${this.state.score}`
-    score.color = '#fff'
-    score.fontSize = 24
-    advancedTexture.addControl(score)
+    let modeSelect = new BABYLON.GUI.TextBlock()
+    modeSelect.text = 'SELECT MODE'
+    modeSelect.color = '#fff'
+    modeSelect.fontSize = 50
+    modeSelect.height = '95px'
+    modeSelect.paddingTop = '30px'
+    modeSelect.paddingTop = '15px'
+    modeSelectScreen.addControl(modeSelect)
 
-    let lives = new BABYLON.GUI.TextBlock()
-    lives.textVerticalAlignment = BABYLON.GUI.Control.VERTICAL_ALIGNMENT_TOP
-    lives.top = '62px'
-    lives.left = '-400px'
-    lives.text = `Lives: ${this.state.lives}`
-    lives.color = '#fff'
-    lives.fontSize = 24
-    advancedTexture.addControl(lives)
+    let survivalAbout = new BABYLON.GUI.TextBlock()
+    survivalAbout.text =
+      'See how long you can last as you type the letters flying by'
+    survivalAbout.color = '#dcd5ef'
+    survivalAbout.fontSize = 13
+    survivalAbout.height = '20px'
+    modeSelectScreen.addControl(survivalAbout)
 
-    this.panel = panel
-    this.lives = lives
-    this.score = score
+    let survival = this.createButton('survival')
+    survival.onPointerUpObservable.add(this.changeMode)
+    modeSelectScreen.addControl(survival)
+
+    let timedAbout = new BABYLON.GUI.TextBlock()
+    timedAbout.text = 'See how many characters you can type in a minute'
+    timedAbout.color = '#dcd5ef'
+    timedAbout.fontSize = 13
+    timedAbout.height = '20px'
+    modeSelectScreen.addControl(timedAbout)
+
+    let timed = this.createButton('timed')
+    timed.onPointerUpObservable.add(this.changeMode)
+    modeSelectScreen.addControl(timed)
+
     this.advancedTexture = advancedTexture
+    this.modeSelectScreen = modeSelectScreen
 
-    this.interval = setInterval(this.play, 1000)
+    this.setState({advancedTexture})
   }
 
-  // GENERATES KEYS IN PANEL
-  play() {
-    const letters = 'abcdefghijklmnopqrstuvwxyz'
-    const chosenLetter = letters[Math.floor(Math.random() * 26)]
-    let clicked = false
-
-    this.setState({keyOrder: [...this.state.keyOrder, chosenLetter]})
-
-    let key = new BABYLON.GUI.Button.CreateSimpleButton(
-      'key',
-      chosenLetter.toUpperCase()
+  createButton(text, bg = '#454251', bgIn = '#54515b') {
+    let button = new BABYLON.GUI.Button.CreateSimpleButton(
+      text,
+      text.toUpperCase()
     )
-    key.width = '50px'
-    key.height = '50px'
-    key.cornerRadius = 5
-    key.thickness = 3
-    key.background = '#fff'
-    this.panel.addControl(key)
+    button.width = '150px'
+    button.height = '65px'
+    button.background = bg
+    button.color = '#fff'
+    button.paddingTop = '10px'
+    button.paddingBottom = '10px'
+    button.thickness = 0
+    button.cornerRadius = 5
+    button.pointerEnterAnimation = () => (button.background = bgIn)
+    button.pointerOutAnimation = () => (button.background = bg)
 
-    let animation = new BABYLON.Animation(
-      'animation',
-      'left',
-      50,
-      BABYLON.Animation.ANIMATIONTYPE_FLOAT,
-      BABYLON.Animation.ANIMATIONLOOPMODE_CONSTANT
-    )
-    let keys = []
+    return button
+  }
 
-    keys.push({
-      frame: 0,
-      value: 425
-    })
+  changeMode(pos, e) {
+    this.setState({mode: e.target.name})
+  }
 
-    keys.push({
-      frame: 100,
-      value: -400
-    })
-
-    // THIS FUNCTION IS DEFAULT WHEN USER PRESSES KEY TOO EARLY OR TOO LATE
-    // DECREASES LIFE
-    const remove = () => {
-      if (!clicked) {
-        this.panel.removeControl(key)
-
-        this.lives.text = `Lives: ${this.state.lives}`
-        if (this.state.lives <= 0) {
-          clearInterval(this.interval)
-
-          let gameOver = new BABYLON.GUI.TextBlock()
-          gameOver.text = 'GAME OVER'
-          gameOver.color = 'red'
-          gameOver.fontSize = 100
-          this.advancedTexture.addControl(gameOver)
-
-          this.gameOver = gameOver
-        } else {
-          this.setState({
-            lives: this.state.lives - 1,
-            keyOrder: this.state.keyOrder.slice(1)
-          })
-        }
-      }
+  componentDidUpdate() {
+    if (!this.state.mode) {
+      this.modeSelectScreen.isVisible = true
+    } else {
+      this.modeSelectScreen.isVisible = false
     }
-
-    animation.setKeys(keys)
-    key.animations = []
-    key.animations.push(animation)
-    this.props.scene.beginAnimation(key, 0, 100, false, 1, remove)
-
-    // IF USER PRESSES CORRECTLY
-    Mousetrap.bind(chosenLetter, e => {
-      if (e.key === this.state.keyOrder[0] && !clicked) {
-        this.panel.removeControl(key)
-
-        clicked = true
-        this.setState({
-          score: this.state.score + 1,
-          keyOrder: this.state.keyOrder.slice(1)
-        })
-        this.score.text = `Score: ${this.state.score}`
-      }
-    })
   }
 
   componentWillUnmount() {
-    this.advancedTexture.removeControl(this.panel)
-    this.advancedTexture.removeControl(this.score)
-    this.advancedTexture.removeControl(this.lives)
-    if (this.gameOver) this.advancedTexture.removeControl(this.gameOver)
-    clearInterval(this.interval)
+    this.modeSelectScreen.isVisible = false
   }
 
   render() {
-    return null
+    console.log(this.state.mode)
+    if (this.state.mode)
+      return (
+        <DDPGameplay
+          mode={this.state.mode}
+          changeMode={this.changeMode}
+          advancedTexture={this.state.advancedTexture}
+          scene={this.props.scene}
+        />
+      )
+    else return null
   }
 }

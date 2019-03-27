@@ -14,8 +14,22 @@ router.get('/', async (req, res, next) => {
 
 router.put('/', async (req, res, next) => {
   try {
-    const userId = req.params.id
-    const user = await Score.findById(userId)
+    const scores = await Score.findAll({
+      order: [['score', 'ASC']]
+    })
+
+    await Score.update(
+      {
+        score: req.body.score,
+        name: req.body.name
+      },
+      {
+        where: {
+          score: scores[0].score
+        }
+      }
+    )
+    res.sendStatus(204)
   } catch (err) {
     next(err)
   }
