@@ -1,5 +1,6 @@
 import React from 'react'
 import {connect} from 'react-redux'
+import {Link} from 'react-router-dom'
 import {
   toggleMode,
   toggleBackground,
@@ -56,7 +57,7 @@ class Sidenav extends React.Component {
           <h3>
             Game Mode <i className="material-icons">info_outline</i>
           </h3>
-          <div className="block">
+          <label className="block">
             <input
               type="radio"
               id="mode1"
@@ -65,10 +66,10 @@ class Sidenav extends React.Component {
               defaultChecked
               onChange={this.onChange}
             />
-            <label htmlFor="mode1">Zen Mode</label>
-          </div>
+            <span>Zen Mode</span>
+          </label>
 
-          <div className="block">
+          <label className="block">
             <input
               type="radio"
               id="mode2"
@@ -76,13 +77,13 @@ class Sidenav extends React.Component {
               value="ddp"
               onChange={this.onChange}
             />
-            <label htmlFor="mode2">Dance Dance Pandalution</label>
-          </div>
+            <span>Dance Dance Pandalution</span>
+          </label>
 
           <h3>
             Character <i className="material-icons">info_outline</i>
           </h3>
-          <div className="block">
+          <label className="block">
             <input
               type="radio"
               id="char1"
@@ -91,10 +92,10 @@ class Sidenav extends React.Component {
               defaultChecked
               onChange={this.onChange}
             />
-            <label htmlFor="char1">Panda</label>
-          </div>
+            <span>Panda</span>
+          </label>
 
-          <div className="block">
+          <label className="block">
             <input
               type="radio"
               id="char2"
@@ -102,13 +103,13 @@ class Sidenav extends React.Component {
               value="robot"
               onChange={this.onChange}
             />
-            <label htmlFor="char2">Robot</label>
-          </div>
+            <span>Robot</span>
+          </label>
 
           <h3>
             Background <i className="material-icons">info_outline</i>
           </h3>
-          <div className="block">
+          <label className="block">
             <input
               type="radio"
               id="bg1"
@@ -117,10 +118,10 @@ class Sidenav extends React.Component {
               defaultChecked
               onChange={this.onChange}
             />
-            <label htmlFor="bg1">Space</label>
-          </div>
+            <span>Space</span>
+          </label>
 
-          <div className="block">
+          <label className="block">
             <input
               type="radio"
               id="bg2"
@@ -128,13 +129,13 @@ class Sidenav extends React.Component {
               value="disco"
               onChange={this.onChange}
             />
-            <label htmlFor="bg2">Disco</label>
-          </div>
+            <span>Disco</span>
+          </label>
 
           <h3>
             Particles <i className="material-icons">info_outline</i>
           </h3>
-          <div className="block">
+          <label className="block">
             <input
               type="radio"
               id="part1"
@@ -143,10 +144,10 @@ class Sidenav extends React.Component {
               defaultChecked
               onChange={this.onChange}
             />
-            <label htmlFor="part1">Flare</label>
-          </div>
+            <span>Flare</span>
+          </label>
 
-          <div className="block">
+          <label className="block">
             <input
               type="radio"
               id="part2"
@@ -154,8 +155,8 @@ class Sidenav extends React.Component {
               value="panda"
               onChange={this.onChange}
             />
-            <label htmlFor="part2">Panda</label>
-          </div>
+            <span>Panda</span>
+          </label>
 
           <h1>About</h1>
           <div className="block">
@@ -163,8 +164,19 @@ class Sidenav extends React.Component {
             semper diam at erat pulvinar, at pulvinar felis blandit. Vestibulum
             volutpat tellus diam, consequat gravida libero rhoncus ut.
           </div>
-        </div>
 
+          <h3>Top Score</h3>
+          <div className="block">
+            <Link to="/scores">
+              <label htmlFor="/scores" className="top-score-label">
+                <span className="top-score">
+                  <i className="material-icons">star</i>
+                  Top Players
+                </span>
+              </label>
+            </Link>
+          </div>
+        </div>
         <i className="material-icons" id="openNav" onClick={this.openNav}>
           menu
         </i>
