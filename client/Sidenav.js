@@ -4,7 +4,8 @@ import {
   toggleMode,
   toggleBackground,
   toggleCharacter,
-  toggleParticles
+  toggleParticles,
+  changeName
 } from './store'
 
 class Sidenav extends React.Component {
@@ -43,6 +44,14 @@ class Sidenav extends React.Component {
           <i className="material-icons" id="closeNav" onClick={this.closeNav}>
             close
           </i>
+          <form>
+            <input
+              type="text"
+              name="userName"
+              placeholder="player name"
+              onChange={e => this.props.changeName(e.target.value)}
+            />
+          </form>
           <h1>Selection Menu</h1>
           <h3>
             Game Mode <i className="material-icons">info_outline</i>
@@ -169,7 +178,8 @@ const mapDispatchToProps = dispatch => {
     toggleMode: mode => dispatch(toggleMode(mode)),
     toggleBackground: bg => dispatch(toggleBackground(bg)),
     toggleCharacter: char => dispatch(toggleCharacter(char)),
-    toggleParticles: part => dispatch(toggleParticles(part))
+    toggleParticles: part => dispatch(toggleParticles(part)),
+    changeName: name => dispatch(changeName(name))
   }
 }
 

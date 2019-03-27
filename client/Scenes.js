@@ -3,6 +3,7 @@ import {Engine} from 'react-babylonjs'
 import DiscoScene from './DiscoScene'
 import Pandance from './Pandance'
 import {connect} from 'react-redux'
+import {addScore} from './store'
 
 class Scenes extends React.Component {
   constructor(props) {
@@ -21,6 +22,8 @@ class Scenes extends React.Component {
                   background={this.props.background}
                   mode={this.props.mode}
                   particles={this.props.particles}
+                  addScore={this.props.addScore}
+                  name={this.props.name}
                 />
               )
             case 'disco':
@@ -44,8 +47,15 @@ const mapStateToProps = state => {
     background: state.toggle.background,
     particles: state.toggle.particles,
     character: state.toggle.character,
-    mode: state.toggle.mode
+    mode: state.toggle.mode,
+    name: state.user.name
   }
 }
 
-export default connect(mapStateToProps)(Scenes)
+const mapDispatchToProps = dispatch => {
+  return {
+    addScore: score => dispatch(addScore(score))
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Scenes)
