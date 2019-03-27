@@ -26,8 +26,8 @@ export default class Score extends React.Component {
             <table className="scroll">
               <thead>
                 <tr>
-                  <th>Player {user.name}</th>
-                  <th>Score {user.score}</th>
+                  <th className="left">Player: {user.name}</th>
+                  <th className="right">Score: {user.score}</th>
                 </tr>
               </thead>
             </table>
@@ -46,7 +46,7 @@ export default class Score extends React.Component {
         >
           Play Again
         </button>
-        <h1>Top 10</h1>
+        <img width="150" height="150" src="assets/top.png" id="container" />
         {userList}
       </div>
     )
