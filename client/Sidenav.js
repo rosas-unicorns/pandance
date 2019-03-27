@@ -1,5 +1,6 @@
 import React from 'react'
 import {connect} from 'react-redux'
+import {Link} from 'react-router-dom'
 import {
   toggleMode,
   toggleBackground,
@@ -154,8 +155,14 @@ class Sidenav extends React.Component {
             semper diam at erat pulvinar, at pulvinar felis blandit. Vestibulum
             volutpat tellus diam, consequat gravida libero rhoncus ut.
           </div>
-        </div>
 
+          <h3>Top Score</h3>
+          <div className="block">
+            <Link to="/scores">
+              <label htmlFor="/scores">Top Players</label>
+            </Link>
+          </div>
+        </div>
         <i className="material-icons" id="openNav" onClick={this.openNav}>
           menu
         </i>
