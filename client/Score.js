@@ -1,6 +1,7 @@
 import React from 'react'
 import axios from 'axios'
 import {Link} from 'react-router-dom'
+import Particle from './particlesForScore'
 
 export default class Score extends React.Component {
   constructor(props) {
@@ -23,7 +24,7 @@ export default class Score extends React.Component {
         scoreList.push(user.score)
         return (
           <div className="container" key={user.id}>
-            <table className="scroll">
+            <table className="sparkle">
               <thead>
                 <tr>
                   <th className="left">Player: {user.name}</th>
