@@ -46,6 +46,7 @@ export default class Score extends React.Component {
           Play Again
         </button>
         <img width="150" height="150" src="assets/top.png" id="container" />
+        <h1>High Score Table</h1>
         {userList}
       </div>
     )

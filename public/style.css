@@ -15,6 +15,10 @@ canvas,
   padding: 0;
 }
 
+canvas {
+  overflow: hidden;
+}
+
 /* SIDE NAVBAR */
 #sidenav {
   height: 100%;
@@ -99,6 +103,7 @@ label {
   font-weight: bold;
   padding-left: 10px;
   transition: 0.3s;
+  font-size: 14px;
 }
 
 label:hover {
@@ -163,5 +168,25 @@ form h1 {
 
 [type='radio']:not(:checked) + span,
 [type='radio']:checked + span {
-  padding-left: 30px;
+  padding-left: 25px;
+  font-size: 13px;
+}
+
+/********* MESSAGE SCROLLBAR *********/
+::-webkit-scrollbar {
+  width: 10px;
+  height: fit-content;
+}
+
+::-webkit-scrollbar-track {
+  background: none;
+}
+
+::-webkit-scrollbar-thumb {
+  height: 15px;
+  background-color: #4c4a4d;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: #403f41;
 }

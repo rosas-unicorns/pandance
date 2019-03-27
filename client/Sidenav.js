@@ -160,23 +160,18 @@ class Sidenav extends React.Component {
             <span>Panda</span>
           </label>
 
-          <h1>About</h1>
-          <div className="block">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam
-            semper diam at erat pulvinar, at pulvinar felis blandit. Vestibulum
-            volutpat tellus diam, consequat gravida libero rhoncus ut.
-          </div>
-
-          <h3>Top Score</h3>
           <div className="block">
             <Link to="/scores">
               <label htmlFor="/scores" className="top-score-label">
                 <span className="top-score">
                   <i className="material-icons">star</i>
-                  Top Players
+                  High Scores
                 </span>
               </label>
             </Link>
+          </div>
+          <div className="block">
+            <a href="https://github.com/rosas-unicorns/Unicorns">Github</a>
           </div>
         </div>
         <i className="material-icons" id="openNav" onClick={this.openNav}>
