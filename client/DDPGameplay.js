@@ -139,7 +139,8 @@ export default class DDPGameplay extends Component {
   }
 
   playTimed() {
-    const chosenLetter = this.letters[Math.floor(Math.random() * 26)]
+    const letters = 'abcdefghijklmnopqrstuvwxyz'
+    const chosenLetter = letters[Math.floor(Math.random() * 26)]
 
     this.setState({keyOrder: [chosenLetter]})
 
@@ -257,6 +258,7 @@ export default class DDPGameplay extends Component {
     else if (this.props.mode === 'timed') {
       this.time.text = `Time: ${this.state.countdown}s`
       if (this.state.countdown <= 0) {
+        this.props.addScore({score: this.state.score, name: this.props.name})
         this.gameOverScreen.isVisible = true
         clearInterval(this.interval)
       }
@@ -266,7 +268,7 @@ export default class DDPGameplay extends Component {
   componentWillUnmount() {
     this.advancedTexture.removeControl(this.panel)
     this.advancedTexture.removeControl(this.time)
-    this.advancedTexture.removeControl(this.score)
+    if (this.score) this.advancedTexture.removeControl(this.score)
     if (this.lives) this.advancedTexture.removeControl(this.lives)
 
     this.gameOverScreen.isVisible = false
