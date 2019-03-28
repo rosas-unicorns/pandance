@@ -65,7 +65,7 @@ Has a side menu that can be closed and opened where you can choose your desired 
 
 ## Credits
 **Framework**
-- HTML5 Canvas
+* HTML5 Canvas
 * [BabylonJS](https://www.babylonjs.com/)
 
 **Node Modules**
@@ -83,8 +83,3 @@ Has a side menu that can be closed and opened where you can choose your desired 
 * Panda Model: [Lily Li](https://github.com/griffnut)
 * Robot Model: [Tetiana Farhuts](https://github.com/Farhuts)
 * Space Background: [Space-3D](http://wwwtyro.github.io/space-3d/)
-
-- Sound: [Patatap](https://github.com/jonobr1/Neuronal-Synchrony)
-- Panda Model: [Lily Li](https://github.com/griffnut)
-- Robot Model: [Tetiana Farhuts](https://github.com/Farhuts)
-- Space Background: [Space-3D](http://wwwtyro.github.io/space-3d/)
