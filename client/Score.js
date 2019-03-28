@@ -37,7 +37,7 @@ export default class Score extends React.Component {
       <div> No scores yet </div>
     )
     return (
-      <div className="container" id="scroll">
+      <div className="container">
         <button
           className="btn waves-effect pink lighten-1"
           type="submit"

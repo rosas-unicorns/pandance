@@ -8,7 +8,7 @@ export default class DDPGameplay extends Component {
       score: 0,
       lives: 3,
       keyOrder: [],
-      timeInterval: 1000,
+      timeInterval: 1100,
       time: 0,
       countdown: 60
     }
@@ -192,7 +192,7 @@ export default class DDPGameplay extends Component {
     let animation = new BABYLON.Animation(
       'animation',
       'left',
-      50,
+      40,
       BABYLON.Animation.ANIMATIONTYPE_FLOAT,
       BABYLON.Animation.ANIMATIONLOOPMODE_CONSTANT
     )
