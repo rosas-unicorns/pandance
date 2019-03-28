@@ -85,6 +85,9 @@ export default class DDP extends Component {
 
   changeMode(pos, e) {
     this.setState({mode: e.target.name})
+    if (this.state.mode) {
+      document.getElementById('sidenav').style.width = '0'
+    }
   }
 
   componentDidUpdate() {

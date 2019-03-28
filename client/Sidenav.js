@@ -16,6 +16,11 @@ class Sidenav extends React.Component {
     this.openNav = this.openNav.bind(this)
     this.closeNav = this.closeNav.bind(this)
     this.onChange = this.onChange.bind(this)
+    this.onSubmit = this.onSubmit.bind(this)
+  }
+
+  onSubmit(e) {
+    e.preventDefault()
   }
 
   onChange(e) {
@@ -45,7 +50,7 @@ class Sidenav extends React.Component {
           <i className="material-icons" id="closeNav" onClick={this.closeNav}>
             close
           </i>
-          <form>
+          <form onSubmit={this.onSubmit}>
             <h1>Your Name</h1>
             <input
               type="text"

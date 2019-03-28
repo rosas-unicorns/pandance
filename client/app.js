@@ -8,11 +8,11 @@ class App extends Component {
   render() {
     return (
       <BrowserRouter>
-        <div id="full">
-          <Route exact path="/scores" component={Score} />
+        <>
           <Route exact path="/" component={Sidenav} />
           <Route exact path="/" component={Scenes} />
-        </div>
+          <Route exact path="/scores" component={Score} />
+        </>
       </BrowserRouter>
     )
   }
