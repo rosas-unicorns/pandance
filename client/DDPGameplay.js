@@ -10,7 +10,8 @@ export default class DDPGameplay extends Component {
       keyOrder: [],
       timeInterval: 1100,
       time: 0,
-      countdown: 60
+      countdown: 60,
+      submitted: false
     }
 
     this.playSurvival = this.playSurvival.bind(this)
@@ -156,15 +157,14 @@ export default class DDPGameplay extends Component {
     this.panel.addControl(key)
 
     Mousetrap.bind(chosenLetter, e => {
-      if (e.key === this.state.keyOrder[0]) {
+      if (e.key === this.state.keyOrder[0] && this.state.countdown > 0) {
         this.panel.removeControl(key)
 
         this.setState({
-          score: this.state.score + 1,
-          keyOrder: []
+          score: this.state.score + 1
         })
 
-        if (this.state.countdown > 0) this.playTimed()
+        this.playTimed()
 
         this.score.text = `Score: ${this.state.score}`
       }
@@ -256,11 +256,14 @@ export default class DDPGameplay extends Component {
     if (this.props.mode === 'survival')
       this.time.text = `Time: ${this.state.time}s`
     else if (this.props.mode === 'timed') {
-      this.time.text = `Time: ${this.state.countdown}s`
-      if (this.state.countdown <= 0) {
-        this.props.addScore({score: this.state.score, name: this.props.name})
+      if (this.state.countdown === 0 && !this.state.submitted) {
+        this.setState({ submitted: true })
+        if (this.props.name) this.props.addScore({ score: this.state.score, name: this.props.name })
         this.gameOverScreen.isVisible = true
         clearInterval(this.interval)
+      } 
+      if (this.state.countdown >= 0) {
+        this.time.text = `Time: ${this.state.countdown}s`
       }
     }
   }

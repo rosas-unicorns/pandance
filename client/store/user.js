@@ -10,7 +10,7 @@ export const changeName = name => ({type: CHANGE_NAME, name})
 
 // INITIAL STATE
 const initialState = {
-  name: 'Player',
+  name: '',
   score: 0
 }
 

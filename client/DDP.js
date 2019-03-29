@@ -1,5 +1,4 @@
 import React, {Component} from 'react'
-import * as Mousetrap from 'mousetrap'
 import DDPGameplay from './DDPGameplay'
 
 export default class DDP extends Component {
@@ -23,7 +22,7 @@ export default class DDP extends Component {
     let modeSelectScreen = new BABYLON.GUI.StackPanel()
     modeSelectScreen.background = '#666270'
     modeSelectScreen.width = '450px'
-    modeSelectScreen.height = '300px'
+    modeSelectScreen.height = '310px'
     advancedTexture.addControl(modeSelectScreen)
 
     let modeSelect = new BABYLON.GUI.TextBlock()
@@ -41,6 +40,7 @@ export default class DDP extends Component {
     survivalAbout.color = '#dcd5ef'
     survivalAbout.fontSize = 13
     survivalAbout.height = '20px'
+    survivalAbout.fontWeight = 'bold'
     modeSelectScreen.addControl(survivalAbout)
 
     let survival = this.createButton('survival')
@@ -52,7 +52,26 @@ export default class DDP extends Component {
     timedAbout.color = '#dcd5ef'
     timedAbout.fontSize = 13
     timedAbout.height = '20px'
+    timedAbout.fontWeight = 'bold'
     modeSelectScreen.addControl(timedAbout)
+
+    let warning = new BABYLON.GUI.TextBlock()
+    warning.text = 'You must submit your name in the sidebar'
+    warning.color = 'yellow'
+    warning.fontSize = 13
+    warning.width = '400px'
+    warning.height = '15px'
+    warning.fontWeight = 'bold'
+    modeSelectScreen.addControl(warning)
+
+    let warning2 = new BABYLON.GUI.TextBlock()
+    warning2.text = 'to get in the high score table'
+    warning2.color = 'yellow'
+    warning2.fontSize = 13
+    warning2.width = '400px'
+    warning2.height = '20px'
+    warning2.fontWeight = 'bold'
+    modeSelectScreen.addControl(warning2)
 
     let timed = this.createButton('timed')
     timed.onPointerUpObservable.add(this.changeMode)

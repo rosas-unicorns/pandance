@@ -3,6 +3,7 @@
   font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande',
     'Lucida Sans', Arial, sans-serif;
   font-size: 14px;
+  cursor: default;
 }
 
 html,
@@ -39,7 +40,16 @@ canvas {
   font-variant-caps: small-caps;
   background-color: #514c55;
   color: #bdbbc3;
-  width: 240px;
+  width: 250px;
+}
+
+#sidenav h2 {
+  padding: 10px 4px;
+  margin: 10px 0px;
+  font-size: 20px;
+  background-color: #514c55;
+  color: #bdbbc3;
+  width: 250px;
 }
 
 #sidenav h3 {
@@ -50,7 +60,7 @@ canvas {
   transition: 0.3s;
   cursor: default;
   background-color: #353238;
-  width: 240px;
+  width: 250px;
 }
 
 #sidenav a:hover {
@@ -90,6 +100,28 @@ canvas {
 #openNav:hover {
   color: #ffffffd8;
   cursor: pointer;
+}
+
+.button-submit {
+  width: 240px;
+  padding: 10px;
+  background-color: #4c4a4d;
+  border: none;
+  font-weight: bold;
+  border-radius: 10px;
+  color: #c5bfd3;
+  margin-left: 5px;
+  transition: 0.5s;
+}
+
+.button-submit:hover {
+  background-color: #5d5562;
+  color: #dedbe6;
+  cursor: pointer;
+}
+
+.button-submit:active {
+  background-color: #6d4a81;
 }
 
 h3 .material-icons {
@@ -141,11 +173,18 @@ table {
 }
 
 #name-input::placeholder {
-  color: #7b7680 !important;
+  color: #7b7680;
 }
 
 #name-input {
-  color: #c5bfd3 !important;
+  color: #c5bfd3;
+  width: 240px;
+  margin-left: 5px;
+  cursor: text;
+}
+
+#name-input:focus {
+  border-color: #be8dda;
 }
 
 form h1 {
