@@ -17,7 +17,6 @@ export default class DDPGameplay extends Component {
     this.playSurvival = this.playSurvival.bind(this)
     this.playTimed = this.playTimed.bind(this)
     this.shuffle = this.shuffle.bind(this)
-    this.addScore = this.addScore.bind(this)
   }
 
   componentDidMount() {
@@ -253,18 +252,12 @@ export default class DDPGameplay extends Component {
     }
   }
 
-  addScore() {
-    if (this.props.name)
-      this.props.addScore({score: this.state.score, name: this.props.name})
-  }
-
   componentWillUpdate() {
     if (this.props.mode === 'survival')
       this.time.text = `Time: ${this.state.time}s`
     else if (this.props.mode === 'timed') {
       if (this.state.countdown === 0 && !this.state.submitted) {
-        this.setState({submitted: true})
-        this.addScore()
+        if (this.props.name) this.props.addScore({score: this.state.score, name: this.props.name})
         this.gameOverScreen.isVisible = true
         clearInterval(this.interval)
       }
