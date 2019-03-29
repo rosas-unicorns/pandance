@@ -12,18 +12,34 @@ import {
 class Sidenav extends React.Component {
   constructor(props) {
     super(props)
+    this.state = {
+      name: '',
+      hasName: false
+    }
 
     this.openNav = this.openNav.bind(this)
     this.closeNav = this.closeNav.bind(this)
-    this.onChange = this.onChange.bind(this)
-    this.onSubmit = this.onSubmit.bind(this)
+    this.toggleScene = this.toggleScene.bind(this)
+    this.handleChange = this.handleChange.bind(this)
+    this.handleSubmit = this.handleSubmit.bind(this)
   }
 
-  onSubmit(e) {
+  handleChange(e) {
+    this.setState({
+      name: e.target.value
+    })
+  }
+
+  handleSubmit(e) {
     e.preventDefault()
+
+    this.props.changeName(this.state.name)
+    this.setState({
+      hasName: true
+    })
   }
 
-  onChange(e) {
+  toggleScene(e) {
     const name = e.target.name
     const value = e.target.value
 
@@ -50,16 +66,25 @@ class Sidenav extends React.Component {
           <i className="material-icons" id="closeNav" onClick={this.closeNav}>
             close
           </i>
-          <form onSubmit={this.onSubmit}>
-            <h1>Your Name</h1>
-            <input
-              type="text"
-              name="userName"
-              id="name-input"
-              placeholder="enter name here"
-              onChange={e => this.props.changeName(e.target.value)}
-            />
-          </form>
+            {
+              this.state.hasName
+              ? <h2>Hey, {this.state.name}!</h2>
+              : <form onSubmit={this.handleSubmit} autocomplete="off">
+                  <h2>Input Name Below</h2>
+                  <input
+                    type="text"
+                    name="userName"
+                    id="name-input"
+                    placeholder="enter name here"
+                    value={this.state.name}
+                    onChange={this.handleChange}
+                    required
+                    minlength="3"
+                    maxlength="15"
+                  />
+                  <button type='submit' className='button-submit'>Submit</button>
+                </form>
+            }
           <h1>Selection Menu</h1>
           <h3>
             Game Mode <i className="material-icons">info_outline</i>
@@ -71,7 +96,7 @@ class Sidenav extends React.Component {
               name="mode"
               value="zen"
               defaultChecked
-              onChange={this.onChange}
+              onChange={this.toggleScene}
             />
             <span>Zen Mode</span>
           </label>
@@ -82,7 +107,7 @@ class Sidenav extends React.Component {
               id="mode2"
               name="mode"
               value="ddp"
-              onChange={this.onChange}
+              onChange={this.toggleScene}
             />
             <span>Dance Dance Pandalution</span>
           </label>
@@ -97,7 +122,7 @@ class Sidenav extends React.Component {
               name="character"
               value="panda"
               defaultChecked
-              onChange={this.onChange}
+              onChange={this.toggleScene}
             />
             <span>Panda</span>
           </label>
@@ -108,7 +133,7 @@ class Sidenav extends React.Component {
               id="char2"
               name="character"
               value="robot"
-              onChange={this.onChange}
+              onChange={this.toggleScene}
             />
             <span>Robot</span>
           </label>
@@ -123,7 +148,7 @@ class Sidenav extends React.Component {
               name="background"
               value="space"
               defaultChecked
-              onChange={this.onChange}
+              onChange={this.toggleScene}
             />
             <span>Space</span>
           </label>
@@ -134,7 +159,7 @@ class Sidenav extends React.Component {
               id="bg2"
               name="background"
               value="disco"
-              onChange={this.onChange}
+              onChange={this.toggleScene}
             />
             <span>Disco</span>
           </label>
@@ -149,7 +174,7 @@ class Sidenav extends React.Component {
               name="particles"
               value="flare"
               defaultChecked
-              onChange={this.onChange}
+              onChange={this.toggleScene}
             />
             <span>Flare</span>
           </label>
@@ -160,20 +185,16 @@ class Sidenav extends React.Component {
               id="part2"
               name="particles"
               value="panda"
-              onChange={this.onChange}
+              onChange={this.toggleScene}
             />
             <span>Panda</span>
           </label>
 
           <div className="block">
-            <Link to="/scores">
-              <label htmlFor="/scores" className="top-score-label">
-                <span className="top-score">
-                  <i className="material-icons">star</i>
-                  High Scores
-                </span>
-              </label>
-            </Link>
+            <div className="top-score">
+              <i className="material-icons">star</i>
+              High Scores
+            </div>
           </div>
           <div className="block">
             <a href="https://github.com/rosas-unicorns/Unicorns">Github</a>
