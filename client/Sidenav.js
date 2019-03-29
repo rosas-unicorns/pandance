@@ -87,7 +87,7 @@ class Sidenav extends React.Component {
             }
           <h1>Selection Menu</h1>
           <h3>
-            Game Mode <i className="material-icons">info_outline</i>
+            Game Mode
           </h3>
           <label className="block">
             <input
@@ -113,7 +113,7 @@ class Sidenav extends React.Component {
           </label>
 
           <h3>
-            Character <i className="material-icons">info_outline</i>
+            Character
           </h3>
           <label className="block">
             <input
@@ -139,7 +139,7 @@ class Sidenav extends React.Component {
           </label>
 
           <h3>
-            Background <i className="material-icons">info_outline</i>
+            Background
           </h3>
           <label className="block">
             <input
@@ -165,7 +165,7 @@ class Sidenav extends React.Component {
           </label>
 
           <h3>
-            Particles <i className="material-icons">info_outline</i>
+            Particles
           </h3>
           <label className="block">
             <input
