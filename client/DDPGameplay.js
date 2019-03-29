@@ -8,7 +8,7 @@ export default class DDPGameplay extends Component {
       score: 0,
       lives: 3,
       keyOrder: [],
-      timeInterval: 1000,
+      timeInterval: 1100,
       time: 0,
       countdown: 60,
       submitted: false
