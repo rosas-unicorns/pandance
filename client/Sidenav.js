@@ -1,6 +1,8 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {Link} from 'react-router-dom'
+import axios from 'axios'
+import Modal from './Modal'
+
 import {
   toggleMode,
   toggleBackground,
@@ -14,7 +16,9 @@ class Sidenav extends React.Component {
     super(props)
     this.state = {
       name: '',
-      hasName: false
+      hasName: false,
+      show: false,
+      scores: []
     }
 
     this.openNav = this.openNav.bind(this)
@@ -22,6 +26,22 @@ class Sidenav extends React.Component {
     this.toggleScene = this.toggleScene.bind(this)
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
+    this.showModal = this.showModal.bind(this)
+    this.hideModal = this.hideModal.bind(this)
+  }
+
+  async componentDidMount() {
+    const { data } = await axios.get('/api/scores')
+    const tenData = data.slice(0, 10)
+    this.setState({scores: tenData})
+  }
+
+  showModal() {
+    this.setState({show: true})
+  }
+
+  hideModal() {
+    this.setState({show: false})
   }
 
   handleChange(e) {
@@ -60,6 +80,25 @@ class Sidenav extends React.Component {
   }
 
   render() {
+    const scoreList = this.state.scores
+    const userList = scoreList.length ? (
+      scoreList.map(user => {
+        return (
+          <div className="container" key={user.id}>
+            <table className="sparkle">
+              <thead>
+                <tr>
+                  <th className="left">Player: {user.name}</th>
+                  <th className="right">Score: {user.score}</th>
+                </tr>
+              </thead>
+            </table>
+          </div>
+        )
+      })
+    ) : (
+      <div> No scores yet </div>
+    ) 
     return (
       <div>
         <div id="sidenav">
@@ -190,11 +229,20 @@ class Sidenav extends React.Component {
             <span>Panda</span>
           </label>
 
+          <h3>Top Score</h3>
           <div className="block">
-            <div className="top-score">
-              <i className="material-icons">star</i>
-              High Scores
-            </div>
+            <label htmlFor="/scores" className="top-score-label">
+              <span className="top-score">
+                <i className="material-icons">star</i>
+                <Modal show={this.state.show} handleClose={this.hideModal}>
+                  <h3 id="top-players">Top Players</h3>
+                  <div>{userList}</div>
+                </Modal>
+                <button className="btn" type="button" onClick={this.showModal}>
+                  Top Players
+                </button>
+              </span>
+            </label>
           </div>
           <div className="block">
             <a href="https://github.com/rosas-unicorns/Unicorns">Github</a>

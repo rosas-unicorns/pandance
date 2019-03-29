@@ -228,3 +228,54 @@ form h1 {
 ::-webkit-scrollbar-thumb:hover {
   background-color: #403f41;
 }
+
+
+/* MODAL */
+.modal {
+  position: fixed;
+  top: 20%;
+  left: 0;
+  width:70%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  border-radius: 25px;
+}
+
+section.modal-main {
+  padding: 2%;
+}
+
+.modal-main {
+  height: auto;
+  top:50%;
+  right:70%;
+  transform: translate(-50%,-50%);
+}
+
+.display-block {
+  display: block;
+}
+
+.display-none {
+  display: none;
+}
+
+h3#top-players {
+  background-color: inherit;
+  color: white
+}
+
+th {
+  font-size: 20px;
+}
+
+.btn {
+  background-color: #36205d42;
+}
+.btn:hover {
+  background-color: #c8bee0;
+}
+
+.btn:after {
+  background-color: #c8bee0;
+}

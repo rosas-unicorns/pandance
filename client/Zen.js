@@ -21,7 +21,7 @@ export default class Zen extends Component {
       'UI'
     )
     let panel = new BABYLON.GUI.StackPanel()
-    panel.verticalAlignment = BABYLON.GUI.Control.VERTICAlALIGNMENT_TOP
+    panel.verticalAlignment = BABYLON.GUI.Control.VERTICAlALIGNMENT_TOP    
     advancedTexture.addControl(panel)
 
     let recBtn = BABYLON.GUI.Button.CreateSimpleButton('rec', 'Rec')
@@ -29,6 +29,7 @@ export default class Zen extends Component {
     recBtn.height = '40px'
     recBtn.color = 'white'
     recBtn.paddingTop = '5px'
+    recBtn.cornerRadius = 10
     recBtn.onPointerUpObservable.add(this.recordSequence)
     panel.addControl(recBtn)
 
@@ -37,6 +38,7 @@ export default class Zen extends Component {
     playBtn.height = '40px'
     playBtn.color = 'white'
     playBtn.paddingTop = '5px'
+    playBtn.cornerRadius = 10
     playBtn.onPointerUpObservable.add(this.play)
     panel.addControl(playBtn)
 
@@ -45,6 +47,7 @@ export default class Zen extends Component {
     pauseBtn.height = '40px'
     pauseBtn.color = 'white'
     pauseBtn.paddingTop = '5px'
+    playBtn.cornerRadius = 10
     pauseBtn.onPointerUpObservable.add(this.pause)
     panel.addControl(pauseBtn)
 
