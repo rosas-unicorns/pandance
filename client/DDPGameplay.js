@@ -257,11 +257,10 @@ export default class DDPGameplay extends Component {
       this.time.text = `Time: ${this.state.time}s`
     else if (this.props.mode === 'timed') {
       if (this.state.countdown === 0 && !this.state.submitted) {
-        this.setState({ submitted: true })
-        if (this.props.name) this.props.addScore({ score: this.state.score, name: this.props.name })
+        if (this.props.name) this.props.addScore({score: this.state.score, name: this.props.name})
         this.gameOverScreen.isVisible = true
         clearInterval(this.interval)
-      } 
+      }
       if (this.state.countdown >= 0) {
         this.time.text = `Time: ${this.state.countdown}s`
       }

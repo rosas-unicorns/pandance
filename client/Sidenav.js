@@ -31,7 +31,7 @@ class Sidenav extends React.Component {
   }
 
   async componentDidMount() {
-    const { data } = await axios.get('/api/scores')
+    const {data} = await axios.get('/api/scores')
     const tenData = data.slice(0, 10)
     this.setState({scores: tenData})
   }
@@ -98,36 +98,36 @@ class Sidenav extends React.Component {
       })
     ) : (
       <div> No scores yet </div>
-    ) 
+    )
     return (
       <div>
         <div id="sidenav">
           <i className="material-icons" id="closeNav" onClick={this.closeNav}>
             close
           </i>
-            {
-              this.state.hasName
-              ? <h2>Hey, {this.state.name}!</h2>
-              : <form onSubmit={this.handleSubmit} autocomplete="off">
-                  <h2>Input Name Below</h2>
-                  <input
-                    type="text"
-                    name="userName"
-                    id="name-input"
-                    placeholder="enter name here"
-                    value={this.state.name}
-                    onChange={this.handleChange}
-                    required
-                    minlength="3"
-                    maxlength="15"
-                  />
-                  <button type='submit' className='button-submit'>Submit</button>
-                </form>
-            }
+          {this.state.hasName ? (
+            <h2>Hey, {this.state.name}!</h2>
+          ) : (
+            <form onSubmit={this.handleSubmit} autoComplete="off">
+              <h2>Input Name Below</h2>
+              <input
+                type="text"
+                name="userName"
+                id="name-input"
+                placeholder="enter name here"
+                value={this.state.name}
+                onChange={this.handleChange}
+                required
+                minLength="3"
+                maxLength="15"
+              />
+              <button type="submit" className="button-submit">
+                Submit
+              </button>
+            </form>
+          )}
           <h1>Selection Menu</h1>
-          <h3>
-            Game Mode
-          </h3>
+          <h3>Game Mode</h3>
           <label className="block">
             <input
               type="radio"
@@ -151,9 +151,7 @@ class Sidenav extends React.Component {
             <span>Dance Dance Pandalution</span>
           </label>
 
-          <h3>
-            Character
-          </h3>
+          <h3>Character</h3>
           <label className="block">
             <input
               type="radio"
@@ -177,9 +175,7 @@ class Sidenav extends React.Component {
             <span>Robot</span>
           </label>
 
-          <h3>
-            Background
-          </h3>
+          <h3>Background</h3>
           <label className="block">
             <input
               type="radio"
@@ -203,9 +199,7 @@ class Sidenav extends React.Component {
             <span>Disco</span>
           </label>
 
-          <h3>
-            Particles
-          </h3>
+          <h3>Particles</h3>
           <label className="block">
             <input
               type="radio"
